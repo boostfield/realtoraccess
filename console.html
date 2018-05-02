@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>个人信息-瑞安居</title>
+  <link rel="stylesheet" href="css/element.css">
+  <link rel="stylesheet" href="css/console.css">
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <div class="main-container">
+      <div class="left-side">
+        <el-menu mode="vertical" class="vertical-nav" :router="false" :unique-opened="true" :default-active="activeIndex" @select="selectMenu">
+          <div>
+            <el-menu-item index="1">
+              <span slot="title">基本信息</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <span slot="title">推广信息</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <span slot="title">认证信息</span>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <span slot="title">修改密码</span>
+            </el-menu-item>
+          </div>
+        </el-menu>
+      </div>
+      <div class="right-side">
+        <!--基本信息-->
+        <div id="page-basic" v-show="activeIndex == 1">
+          <div class="header title">个人信息</div>
+          <el-form ref="basicForm" :model="user" label-width="80px">
+            <el-row>
+              <el-col :lg="12">
+                  <el-form-item label="姓名">
+                      <el-input v-model="user.username"></el-input>
+                    </el-form-item>
+              </el-col>
+              <el-col :lg="12">
+                  <el-form-item label="电话">
+                      <el-input v-model="user.tel"></el-input>
+                    </el-form-item>
+              </el-col>
+            </el-row>
+            
+            <el-form-item label="头像">
+              <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" :show-file-list="false" :on-success="handleAvatarSuccess"
+                :data="avatarData" name="head">
+                <img v-if="user.head" :src="user.head" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+            
+            <el-form-item label="联系邮箱">
+              <el-input v-model="user.email"></el-input>
+            </el-form-item>
+            <el-form-item label="个人签名">
+              <el-input type="textarea" v-model="user.note"></el-input>
+            </el-form-item>
+            
+            <el-row>
+              <el-form-item label="地址">
+                <el-select v-model="user.country" @change="countryChange" placeholder="国家">
+                  <el-option v-for="item in countryList" :key="item.countryid" :label="item.countryid" :value="item.countryid">
+                  </el-option>
+                </el-select>
+                <el-select v-if="user.country" v-model="user.prov" @change="provChange" placeholder="省份">
+                  <el-option v-for="item in provList" :key="item.provid" :label="item.provid" :value="item.provid">
+                  </el-option>
+                </el-select>
+                <el-select v-if="user.prov" v-model="user.group" @change="groupChange" placeholder="大区">
+                  <el-option v-for="item in groupList" :key="item.groupid" :label="item.groupid" :value="item.groupid">
+                  </el-option>
+                </el-select>
+                <el-select v-if="user.group" v-model="user.city" @change="cityChange" placeholder="城市">
+                  <el-option v-for="item in cityList" :key="item.cityid" :label="item.cityid" :value="item.cityid">
+                  </el-option>
+                </el-select>
+                <el-select v-if="user.city" v-model="user.county" placeholder="区县">
+                  <el-option v-for="item in countyList" :key="item.countyid" :label="item.countyid" :value="item.countyid">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-row>
+            
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitBasicForm">保存</el-button>
+              <el-button>取消</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+        <!--推广订单-->
+        <div id="page-promotion" v-show="activeIndex == 2">
+          hello page-promotion
+        </div>
+        <!--认证信息-->
+        <div id="page-authentication" v-show="activeIndex == 3">
+          hello page-authentication
+        </div>
+        <!--修改密码-->
+        <div id="page-password" v-show="activeIndex == 4">
+          hello page-password
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="js/vue.min.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/element.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    delimiters: ['[[', ']]'],
+    data: function () {
+      return {
+        activeIndex: '1',
+        user: {
+          userid: 'myccy123@126.com',
+          country: '',
+          prov: '',
+          group: '',
+          city: '',
+          county: ''
+        },
+        avatarData: {},
+        headImage: null,
+        countryList: [],
+        provList: [],
+        groupList: [],
+        cityList: [],
+        countyList: []
+      }
+    },
+    beforeMount: function () {
+      //this.user.userid = 'myccy123@126.com'
+      //this.user.head = "{% static {{user.head}} %}"
+      this.avatarData.userid = this.user.userid
+      this.fetchCountryList()
+      this.fetchProvList()
+      this.fetchGroupList()
+      this.fetchCityList()
+      this.fetchCountyList()
+    },
+    methods: {
+      selectMenu: function (index) {
+        this.activeIndex = index
+      },
+      handleAvatarSuccess: function (res, file) {
+        this.user.head = URL.createObjectURL(file.raw)
+        this.$message({
+          message: '上传头像成功',
+          type: 'success'
+        })
+      },
+      deleteImage: function (id) {
+        console.log(id)
+      },
+      countryChange: function () {
+        this.user.prov = ''
+        this.fetchProvList()
+      },
+      provChange: function () {
+        this.user.group = ''
+        this.fetchGroupList()
+      },
+      groupChange: function () {
+        this.user.city = ''
+        this.fetchCityList()
+      },
+      cityChange: function () {
+        this.user.county = ''
+        this.fetchCountyList()
+      },
+      fetchCountryList: function () {
+        var self = this
+        axios.get('http://www.realtoraccess.com/web/get/countries/').then(function (resp) {
+          self.countryList = resp.data
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      fetchProvList: function () {
+        var self = this
+        axios.get('http://www.realtoraccess.com/web/get/provs/', { params: { countryid: this.user.country } }).then(function (resp) {
+          self.provList = resp.data
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      fetchGroupList: function () {
+        var self = this
+        axios.get('http://www.realtoraccess.com/web/get/groups/', { params: { provid: this.user.prov } }).then(function (resp) {
+          self.groupList = resp.data
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      fetchCityList: function () {
+        var self = this
+        axios.get('http://www.realtoraccess.com/web/get/cities/', { params: { groupid: this.user.group } }).then(function (resp) {
+          self.cityList = resp.data
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      fetchCountyList: function () {
+        var self = this
+        axios.get('http://www.realtoraccess.com/web/get/counties/', { params: { cityid: this.user.city } }).then(function (resp) {
+          self.countyList = resp.data
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      submitBasicForm: function () {
+        var self = this
+        this.$refs['basicForm'].validate(function (valid) {
+          if (valid) {
+            axios.post('http://www.realtoraccess.com/web/postinfo/', self.user).then(function (resp) {
+              this.$message({
+                message: '修改个人信息成功',
+                type: 'success'
+              })
+            }).catch(function (err) {
+              console.log(err)
+            })
+          }
+        })
+      }
+    }
+  })
+</script>
+
+</html>

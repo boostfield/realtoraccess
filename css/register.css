@@ -30,7 +30,7 @@ footer h4 {
   text-align: center;
 }
 .top {
-  background-image: url('../img/bg_login@2x.png');
+  background-image: url('../img/bg_signup@2x.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -69,34 +69,34 @@ footer h4 {
   background-color: #00C700;
   margin: 0 auto 10px 0;
 }
-#formLogin {
+#formRegister {
   background: white;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
   padding: 39px 49px;
   width: 428px;
-  height: 425px;
+  height: 457px;
 }
-#formLogin h4 {
+#formRegister h4 {
   color: #999;
   font-weight: 400;
   margin-top: 0;
 }
-#formLogin h3 {
+#formRegister h3 {
   color: #00C700;
   margin-top: 0;
   margin-bottom: 30px;
 }
-#formLogin input {
+#formRegister input {
   height: 48px;
   border: 1px solid #E5E5E5;
   border-radius: 0;
   margin-top: 20px;
   width: 100%;
 }
-#formLogin .form-group {
+#formRegister .form-group {
   height: 48px;
 }
-#formLogin button.btn-primary {
+#formRegister button.btn-primary {
   background-color: #00C700;
   font-size: 0.8rem;
   color: white;
@@ -109,30 +109,30 @@ footer h4 {
   transition: box-shadow 0.5s;
   margin-top: 35px;
 }
-#formLogin button.btn-primary:hover {
+#formRegister button.btn-primary:hover {
   box-shadow: 5px 5px 10px rgba(88, 196, 57, 0.44);
 }
-#formLogin label.error {
+#formRegister label.error {
   color: #ff1c1c;
   font-size: 0.6rem;
 }
-#formLogin .forget-password {
+#formRegister .forget-password {
   color: #999;
   font-size: 0.7rem;
   text-align: right;
   display: block;
   font-weight: 500;
 }
-#formLogin .hint {
+#formRegister .hint {
   display: block;
   margin-top: 24px;
   text-align: center;
 }
-#formLogin .hint span {
+#formRegister .hint span {
   color: #333;
   font-size: 0.8rem;
 }
-#formLogin .hint a {
+#formRegister .hint a {
   color: #00C700;
   font-size: 0.8rem;
   text-decoration: underline;
@@ -141,6 +141,34 @@ footer h4 {
   background-position: center right;
   background-size: 18px;
   padding-right: 24px;
+}
+.feature {
+  background: white;
+  text-align: center;
+  padding: 72px 0;
+}
+.feature h2 {
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: #666;
+  margin-bottom: 87px;
+}
+.feature .feature-item img {
+  width: 93px;
+}
+.feature .feature-item h3 {
+  color: #00C700;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 3;
+}
+.feature .feature-item h4 {
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 270px;
+  margin: 0 auto;
 }
 .contact {
   padding: 60px 0;

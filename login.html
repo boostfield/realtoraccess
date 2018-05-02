@@ -1,38 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Realtoraccess</title>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
-    
-  </head>
-  <body>
-    <div>
-        <form id="formLogin">
-            <div class="form-group">
-              <label for="userid">Username</label>
-              <input type="email" class="form-control" id="userid" placeholder="username" name="userid" required>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Realtoraccess</title>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="main">
+      <div class="top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <img src="img/img_log_logo@2x.png" width="225" style="margin-top: 50px;" />
+              <h2 class="left-title">Accessible to Chinese
+                <br> Market Easily</h2>
+              <button class="btn-contact" title="Contact Us"></button>
             </div>
-            <div class="form-group">
-              <label for="passwd">Password</label>
-              <input type="password" class="form-control" id="passwd" placeholder="password" name="passwd" required>
+            <div class="col-lg-6 col-md-12">
+              <button class="btn-back">Back</button>
+              <form id="formLogin">
+                <h4>Welcome back to</h4>
+                <h3>Realtoraccess</h3>
+                <div class="form-group">
+                  <input type="email" class="form-control" id="userid" placeholder="Email" name="userid" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="passwd" placeholder="Password" name="passwd" required>
+                </div>
+                <a href="#" class="forget-password">Forget Your Password?</a>
+                <button type="submit" class="btn btn-primary">Log in</button>
+                <div class="hint">
+                  <span>Dont't have an account? </span>
+                  <a href="register.html"> Sign up</a>
+                </div>
+              </form>
             </div>
-            <button type="submit" class="btn btn-default">Login</button>
-        </form>
+          </div>
+        </div>
+      </div>
+      <div class="container contact">
+          <div class="friend-link">
+            <a href="#">Career</a>
+            <a href="#">Partnership</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term of Service</a>
+          </div>
+          <div class="row info">
+            <div class="col-lg-3">
+              <h3>E-mail:</h3>
+              <h4>
+                <a href="mailto:clientservice@realtoraccess.com">clientservice@realtoraccess.com</a>
+              </h4>
+            </div>
+            <div class="col-lg-5">
+              <h3>Headquarter:</h3>
+              <h4>B-2003-033, 17th floor, Building 1, #18 East Road
+                <br> Zhongguancun, Haidian District, Beijing, China 100083</h4>
+            </div>
+            <div class="col-lg-4">
+              <h3>Vancouver:</h3>
+              <h4>1788 Ontario St.Vancouver. BC V5T OG3 Canada</h4>
+            </div>
+          </div>
+        </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="main.js"></script>
-  </body>
+
+    <footer>
+      <h4>©海外瑞安居（北京）科技发展有限公司 版权所有|京ICP备17003593号</h4>
+    </footer>
+
   
- 
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="js/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="main.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-116462236-1');
+  </script>
+</body>
+
 </html>

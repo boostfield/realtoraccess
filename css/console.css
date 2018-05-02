@@ -1,0 +1,97 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  font-size: 20px;
+}
+[v-cloak] {
+  display: none;
+}
+.el-header {
+  padding: 0;
+}
+.el-header .el-menu .el-submenu {
+  float: right;
+}
+.el-main {
+  padding: 0;
+}
+.left-side,
+.right-side {
+  display: inline-block;
+}
+.left-side {
+  width: 220px;
+  margin: 0;
+}
+.right-side {
+  width: 780px;
+  float: right;
+  margin: 0;
+}
+.main-container {
+  width: 1000px;
+  margin: 2em auto;
+}
+.vertical-nav {
+  width: 180px;
+  border: 1px solid #e5e5e5;
+}
+.vertical-nav .el-menu-item {
+  text-align: center;
+  color: #333;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.vertical-nav .el-menu-item.is-active {
+  color: #58c439;
+  border-left: 4px solid #58c439;
+}
+.vertical-nav .el-menu-item:hover {
+  background-color: white;
+}
+.header.title {
+  color: #333;
+  font-size: 1em;
+  font-weight: 400;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 1em;
+  line-height: 1.75;
+}
+.avatar-uploader {
+  display: inline-block;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #e5e5e5;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-icon-delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #58c439;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.el-select > .el-input {
+  width: 135px;
+}
