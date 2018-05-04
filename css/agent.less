@@ -56,7 +56,7 @@ img {
     .not-login {
         line-height: 90px;
         color: @main-color;
-        margin-right: 10px;
+        margin-right: 4px;
     }
 }
 .top {
@@ -73,7 +73,7 @@ img {
         right: 0;
         bottom: 0;
         left: 0;
-        background-image: linear-gradient(to bottom, transparent,#fff);
+        background-image: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.96));
         opacity: 1; 
     }
     .share-options {
@@ -103,7 +103,7 @@ img {
     }
     .title-info {
         position: absolute;
-        bottom: 0;
+        bottom: 20px;
         left: 0;
         right: 0;
         .avatar {
@@ -198,7 +198,7 @@ img {
         }
         &.qrcode {
             img {
-                width: 86px;
+                width: 85px;
             }
         }
         h3 {
@@ -206,6 +206,7 @@ img {
         }
         h4 {
             font-size: 0.8rem;
+            font-weight: 400;
         }
     }
 }
@@ -214,6 +215,25 @@ img {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+}
+h4 {
+    font-size: 0.7rem;
+    line-height: 1.70;
+    font-weight: 400;
+    max-height: 255px;
+    overflow: hidden;
+    text-indent: 2em;
+    .read-more {
+        position: absolute;
+        width: 100px;
+        text-align: right;
+        bottom: 12px;
+        right: 20px;
+        background-color: @bg-color;
+        color: @main-color;
+        outline: none;
+        display: none;
+    }
 }
 .personal-info {
     background-color: @bg-color;
@@ -235,24 +255,7 @@ img {
             left: 0;
         }
     }
-    h4 {
-        font-size: 0.7rem;
-        line-height: 1.70;
-        font-weight: 400;
-        max-height: 255px;
-        overflow: hidden;
-        text-indent: 2em;
-        .read-more {
-            position: absolute;
-            width: 100px;
-            text-align: right;
-            bottom: 10px;
-            right: 20px;
-            background-color: @bg-color;
-            color: @main-color;
-            outline: none;
-        }
-    }
+    
     #carousel-agent {
         width: 420px;
         margin: 0 0 0 auto;
@@ -312,15 +315,15 @@ img {
         overflow: hidden;
         text-indent: 2em;
         .read-more {
-            position: absolute;
-            width: 100px;
-            text-align: right;
-            bottom: 10px;
-            right: 10px;
             background-color: white;
-            color: @main-color;
-            outline: none;
         }
+    }
+    .popover {
+        width: 543px;
+        max-width: 543px;
+        padding: 20px;
+        max-height: 395px;
+        overflow: auto;
     }
 }
 .company-info {
@@ -350,16 +353,13 @@ img {
         max-height: 255px;
         overflow: hidden;
         text-indent: 2em;
-        .read-more {
-            position: absolute;
-            width: 100px;
-            text-align: right;
-            bottom: 10px;
-            right: 10px;
-            background-color: @bg-color;
-            color: @main-color;
-            outline: none;
-        }
+    }
+    .popover {
+        width: 543px;
+        max-width: 543px;
+        padding: 20px;
+        max-height: 395px;
+        overflow: auto;
     }
 }
 .sources-list {
@@ -367,6 +367,10 @@ img {
     padding-bottom: 90px;
     .item {
         margin-top: 40px;
+        img {
+            width: 234px;
+            height: 154px;
+        }
         a {
             cursor: pointer;
             text-decoration: none;
@@ -414,6 +418,9 @@ img {
         .col-lg-4 {
             padding-left: 0;
         }
+        &:nth-child(odd) {
+            clear: left;
+        }
         img {
             width: 150px;
             height: 120px;
@@ -425,6 +432,7 @@ img {
             -webkit-line-clamp: 2;
             overflow: hidden;
             margin-top: 8px;
+            line-height: 1.5;
         }
         h4 {
             font-size: 0.7rem;
@@ -512,7 +520,7 @@ img {
     z-index: 999;
     position: fixed;
     right: 21px;
-    top: 640px;
+    top: 40vh;
     cursor: pointer;
     .btn-option {
         margin-top: 14px;
@@ -523,7 +531,7 @@ img {
 }
 #wechat-qrcode {
     position: fixed;
-    top: 666px;
+    top: 42vh;
     right: 73px;
     z-index: 999;
     display: none;
@@ -541,9 +549,6 @@ img {
         height: 60px;
         .navbar-nav > li {
             margin: 0;
-        }
-        .navbar-nav > li > a {
-            padding: 0;
         }
         .navbar-text.location {
             line-height: 60px;
@@ -586,13 +591,15 @@ img {
             width: 100%;
         }
         h2 {
-            text-align: left;
+            text-align: center;
             &:after {
-                left: 0;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
         h4 {
             max-height: initial;
+            text-align: center;
             .read-more {
                 display: none;
             }
@@ -609,6 +616,7 @@ img {
     .sources-list {
         padding-top: 20px;
         padding-bottom: 20px;
+        text-align: center;
         .item {
             margin-top: 20px;
             img {
@@ -620,7 +628,7 @@ img {
     .related-readings {
         padding-top: 20px;
         padding-bottom: 20px;
-        
+        text-align: center;
         .item {
             .col-lg-4 {
                 padding-left: 15px;
@@ -643,6 +651,9 @@ img {
         .contact {
             padding-left: 15px;
         }
+    }
+    .footer-bottom {
+        display: none;
     }
     .fixed-options {
         display: none;

@@ -31,7 +31,7 @@
                     <a class="navbar-brand" href="#">
                         <img alt="Brand" src="{% static 'web/img/img_nav_logo@2x.png' %}" />
                     </a>
-                    <p class="navbar-text location">加拿大-大温地区</p>
+                    <span class="navbar-text location">加拿大-大温地区</span>
                 </div>
             </div>
 
@@ -147,7 +147,7 @@
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item qrcode">
                 <img src="{{user.qrcode.url}}" alt="个人微信" />
-                <h3>个人微信</h3>
+                <h4>个人微信</h4>
             </div>
         </div>
     </div>
@@ -158,8 +158,8 @@
                 <div class="col-lg-6 col-md-12 ">
                     <div class="text-part">
                         <h2>个人介绍</h2>
-                        <h4>{{user.selfintro}}
-                            <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                        <h4 id="selfIntro">{{user.selfintro}}
+                            <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
                                 title="" data-content="<div>{{user.selfintro}}
                                 </div>">[查看更多]</div>
                         </h4>
@@ -205,19 +205,24 @@
     <div class="team-info">
         <div class="container">
             <div class="row vertical-align">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12 hidden-xs">
                     <img width="420" height="420" src="{% static 'web/img/img_team@2x.png'%}"/>
                 </div>
                 <div class="col-lg-6 col-md-12 ">
 
                     <div class="text-part">
                         <h2>团队介绍</h2>
-                        <h4>{{user.teamintro}}
-                        </h4>
+                        <h4 id="teamIntro">{{user.teamintro}}
+                                <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                    title="" data-content="<div>{{user.teamintro}}
+                                    </div>">[查看更多]</div>
+                            </h4>
                     </div>
 
                 </div>
-
+                <div class="col-lg-6 col-md-12 visible-xs">
+                        <img width="420" height="420" src="{% static 'web/img/img_team@2x.png'%}"/>
+                    </div>
             </div>
         </div>
     </div>
@@ -232,8 +237,11 @@
 
                     <div class="text-part">
                         <h2>公司介绍</h2>
-                        <h4>{{user.corpintro}}
-                        </h4>
+                        <h4 id="corpIntro">{{user.corpintro}}
+                                <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                    title="" data-content="<div>{{user.corpintro}}
+                                    </div>">[查看更多]</div>
+                            </h4>
                     </div>
 
                 </div>

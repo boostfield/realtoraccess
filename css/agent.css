@@ -59,7 +59,7 @@ img {
 .navbar .not-login {
   line-height: 90px;
   color: #00C700;
-  margin-right: 10px;
+  margin-right: 4px;
 }
 .top {
   height: 580px;
@@ -76,7 +76,7 @@ img {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(to bottom, transparent, #fff);
+  background-image: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.96));
   opacity: 1;
 }
 .top .share-options {
@@ -105,7 +105,7 @@ img {
 }
 .top .title-info {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   left: 0;
   right: 0;
 }
@@ -201,19 +201,39 @@ img {
   width: 40px;
 }
 .basic-info .item.qrcode img {
-  width: 86px;
+  width: 85px;
 }
 .basic-info .item h3 {
   font-size: 1rem;
 }
 .basic-info .item h4 {
   font-size: 0.8rem;
+  font-weight: 400;
 }
 .vertical-align {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+}
+h4 {
+  font-size: 0.7rem;
+  line-height: 1.70;
+  font-weight: 400;
+  max-height: 255px;
+  overflow: hidden;
+  text-indent: 2em;
+}
+h4 .read-more {
+  position: absolute;
+  width: 100px;
+  text-align: right;
+  bottom: 12px;
+  right: 20px;
+  background-color: #FAFAFA;
+  color: #00C700;
+  outline: none;
+  display: none;
 }
 .personal-info {
   background-color: #FAFAFA;
@@ -234,24 +254,6 @@ img {
   background: #00C700;
   bottom: 0;
   left: 0;
-}
-.personal-info h4 {
-  font-size: 0.7rem;
-  line-height: 1.70;
-  font-weight: 400;
-  max-height: 255px;
-  overflow: hidden;
-  text-indent: 2em;
-}
-.personal-info h4 .read-more {
-  position: absolute;
-  width: 100px;
-  text-align: right;
-  bottom: 10px;
-  right: 20px;
-  background-color: #FAFAFA;
-  color: #00C700;
-  outline: none;
 }
 .personal-info #carousel-agent {
   width: 420px;
@@ -314,14 +316,14 @@ img {
   text-indent: 2em;
 }
 .team-info h4 .read-more {
-  position: absolute;
-  width: 100px;
-  text-align: right;
-  bottom: 10px;
-  right: 10px;
   background-color: white;
-  color: #00C700;
-  outline: none;
+}
+.team-info .popover {
+  width: 543px;
+  max-width: 543px;
+  padding: 20px;
+  max-height: 395px;
+  overflow: auto;
 }
 .company-info {
   background-color: #FAFAFA;
@@ -352,15 +354,12 @@ img {
   overflow: hidden;
   text-indent: 2em;
 }
-.company-info h4 .read-more {
-  position: absolute;
-  width: 100px;
-  text-align: right;
-  bottom: 10px;
-  right: 10px;
-  background-color: #FAFAFA;
-  color: #00C700;
-  outline: none;
+.company-info .popover {
+  width: 543px;
+  max-width: 543px;
+  padding: 20px;
+  max-height: 395px;
+  overflow: auto;
 }
 .sources-list {
   padding-top: 90px;
@@ -368,6 +367,10 @@ img {
 }
 .sources-list .item {
   margin-top: 40px;
+}
+.sources-list .item img {
+  width: 234px;
+  height: 154px;
 }
 .sources-list .item a {
   cursor: pointer;
@@ -414,6 +417,9 @@ img {
 .related-readings .item .col-lg-4 {
   padding-left: 0;
 }
+.related-readings .item:nth-child(odd) {
+  clear: left;
+}
 .related-readings .item img {
   width: 150px;
   height: 120px;
@@ -425,6 +431,7 @@ img {
   -webkit-line-clamp: 2;
   overflow: hidden;
   margin-top: 8px;
+  line-height: 1.5;
 }
 .related-readings .item h4 {
   font-size: 0.7rem;
@@ -508,7 +515,7 @@ img {
   z-index: 999;
   position: fixed;
   right: 21px;
-  top: 640px;
+  top: 40vh;
   cursor: pointer;
 }
 .fixed-options .btn-option {
@@ -516,7 +523,7 @@ img {
 }
 #wechat-qrcode {
   position: fixed;
-  top: 666px;
+  top: 42vh;
   right: 73px;
   z-index: 999;
   display: none;
@@ -535,9 +542,6 @@ img {
   }
   .navbar .navbar-nav > li {
     margin: 0;
-  }
-  .navbar .navbar-nav > li > a {
-    padding: 0;
   }
   .navbar .navbar-text.location {
     line-height: 60px;
@@ -579,17 +583,19 @@ img {
   .team-info h2,
   .personal-info h2,
   .company-info h2 {
-    text-align: left;
+    text-align: center;
   }
   .team-info h2:after,
   .personal-info h2:after,
   .company-info h2:after {
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .team-info h4,
   .personal-info h4,
   .company-info h4 {
     max-height: initial;
+    text-align: center;
   }
   .team-info h4 .read-more,
   .personal-info h4 .read-more,
@@ -609,6 +615,7 @@ img {
   .sources-list {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
   }
   .sources-list .item {
     margin-top: 20px;
@@ -620,6 +627,7 @@ img {
   .related-readings {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
   }
   .related-readings .item {
     margin-top: 20px;
@@ -640,6 +648,9 @@ img {
   }
   .footer-top .contact {
     padding-left: 15px;
+  }
+  .footer-bottom {
+    display: none;
   }
   .fixed-options {
     display: none;

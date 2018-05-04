@@ -35,6 +35,15 @@ $(document).ready(function () {
   $('.backTop').click(function () {
     $('html,body').animate({ scrollTop: 0 }, 'slow')
   })
+  if ($('#selfIntro')[0].scrollHeight > 255) {
+    $('#selfIntro > .read-more').show()
+  }
+  if ($('#teamIntro')[0].scrollHeight > 255) {
+    $('#teamIntro > .read-more').show()
+  }
+  if ($('#corpIntro')[0].scrollHeight > 255) {
+    $('#corpIntro > .read-more').show()
+  }
 })
 $(document).mouseup(function (e) {
   var container = $(".popover")
