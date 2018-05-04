@@ -369,6 +369,11 @@ img {
 .sources-list .item {
   margin-top: 40px;
 }
+.sources-list .item a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+}
 .sources-list .item h3 {
   font-size: 0.9rem;
   overflow: hidden;
@@ -400,6 +405,11 @@ img {
 }
 .related-readings .item {
   margin-top: 30px;
+}
+.related-readings .item a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
 }
 .related-readings .item .col-lg-4 {
   padding-left: 0;

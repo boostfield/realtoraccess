@@ -8,10 +8,10 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Realtoraccess</title>
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/register.css" rel="stylesheet">
-
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/register.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'web/css/register.css' %}">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-12">
-            <img src="img/img_log_logo@2x.png" width="225" style="margin-top: 50px;" />
+            <img src="{% static 'web/img/img_log_logo@2x.png' %}" width="225" style="margin-top: 50px;" />
             <h2 class="left-title">Accessible to Chinese
               <br> Market Easily</h2>
             <button class="btn-contact" title="Contact Us"></button>
@@ -37,7 +37,7 @@
               <div class="form-group">
                 <input type="password" class="form-control" id="passwd" placeholder="Password" name="passwd" required>
               </div>
-
+              <label id="error-info" class="error"></label>
               <button type="submit" class="btn btn-primary">Sign up now</button>
               <div class="hint">
                 <span>Already have an account? </span>
@@ -52,17 +52,17 @@
       <div class="container">
         <h2>Product Features</h2>
         <div class="col-lg-4 feature-item">
-          <img src="img/img_features_01@2x.png" />
+          <img src="{% static 'web/img/img_features_01@2x.png' %}" />
           <h3>Chinese SEO</h3>
           <h4>Powerful lead generating tool catering to Chinese market</h4>
         </div>
         <div class="col-lg-4 feature-item">
-          <img src="img/img_features_02@2x.png" />
+          <img src="{% static 'web/img/img_features_02@2x.png' %}" />
           <h3>Chinese Homepage</h3>
           <h4>Your online Chinese business card builds your brand in Chinese community</h4>
         </div>
         <div class="col-lg-4 feature-item">
-          <img src="img/img_features_03@2x.png" />
+          <img src="{% static 'web/img/img_features_03@2x.png' %}" />
           <h3>Market Your Listing on Wechat</h3>
           <h4>Promote your listings through listing map in Wechat and reach 20,000 Local Wechat Users</h4>
         </div>
@@ -101,12 +101,14 @@
   </footer>
 
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="js/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
-  <script src="main.js"></script>
+  <script src="js/main.js"></script> -->
+  <script src="{% static 'web/js/jquery.min.js' %}"></script>
+  <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'web/js/main.js' %}"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
   <script>

@@ -75,6 +75,7 @@ footer h4 {
   padding: 39px 49px;
   width: 428px;
   height: 425px;
+  position: relative;
 }
 #formLogin h4 {
   color: #999;
@@ -141,6 +142,11 @@ footer h4 {
   background-position: center right;
   background-size: 18px;
   padding-right: 24px;
+}
+#formLogin #error-info {
+  position: absolute;
+  bottom: 120px;
+  left: 49px;
 }
 .contact {
   padding: 60px 0;

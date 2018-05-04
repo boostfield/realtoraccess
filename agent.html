@@ -8,9 +8,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Realtoraccess</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/agent.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agent.css" rel="stylesheet"> -->
 
 </head>
 
@@ -28,7 +29,7 @@
                 </button>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        <img alt="Brand" src="img/img_nav_logo@2x.png" />
+                        <img alt="Brand" src="{% static 'web/img/img_nav_logo@2x.png' %}" />
                     </a>
                     <p class="navbar-text location">加拿大-大温地区</p>
                 </div>
@@ -52,16 +53,18 @@
                     <li>
                         <a href="#">全球资讯</a>
                     </li>
-                    <a class="not-login">Agent? Log in</a>
+                    <a class="not-login" href="login.html">Agent? Log in</a>
                     <a class="not-login"> | </a>
-                    <a class="not-login">Sign up</a>
+                    <a class="not-login" href="register.html">Sign up</a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="top">
+    <div class="top" {% if user.logo%} 
+        style="background-image: url({{user.logo}});" 
+        {% endif %}>
         <div class="container">
             <div class="share-options">
                 <button class="btn-share facebook"></button>
@@ -71,45 +74,48 @@
         </div>
         <div class="container title-info">
             <div class="col-lg-6 text-left">
-                <img class="avatar" src="img/img_wechat@2x.png" width="122" />
+                <img class="avatar" src="{{user.head}}" width="122" />
                 <div class="name">
-                    <h1>Colin Davidson
-                        <img class="authenticated" src="img/img_sign_renzheng@2x.png" width="90" />
+                    <h1>{{user.username}}
+                        {% if auth == 1 %}
+                            <img class="authenticated" src="{% static 'web/img/img_sign_renzheng@2x.png'%}" width="90" />
+                        {% endif %}
                     </h1>
-                    <h4 class="city">温哥华经纪
-                        <span class="company"> | 温哥华麦德唐纳德地产公司</span>
+                    <h4 class="city">{{user.group}}经纪
+                        <span class="company"> | {{user.corp}}</span>
                     </h4>
                 </div>
             </div>
             <div class="col-lg-6 text-right">
                 <div class="logo">
-                    <h2>探索最舒适的海外房源</h2>
-                    <span class="service" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                    <h2>{{user.note}}</h2>
+                    <span class="service" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="bottom"
                         title="" data-content="<div>
-                            <img class='avatar' src='img/img_wechat@2x.png' width='77'/>
+                            <img class='avatar' src='{{user.head2}}' width='77'/>
                             <div class='info'>
-                                    <h2>赵子勋</h2>
-                                    <p>电话: 1234567</p>
-                                    <p>邮箱: 2423535@qq.com</p>
-                                    <p>微信: <img src='img/img_wechat@2x.png' width='62'/></p>
+                                    <h2>{{user.username2}}</h2>
+                                    <p>电话: {{user.tel2}}</p>
+                                    <p>邮箱: {{user.email2}}</p>
+                                    <p>微信: <img src='{{user.qrcode2}}' width='62'/></p>
                             </div>
-                            <form>
+                            <form id='formMessage'>
+                                <input type='hidden' class='form-control' id='userid' value='{{user.userid}}'>
                                 <div class='form-group'>
-                                    <input type='text' class='form-control' id='inputName' placeholder='您的姓名'>
+                                    <input type='text' class='form-control' id='inputName' placeholder='您的姓名' required>
                                 </div>
                                 <div class='form-group'>
-                                    <input type='email' class='form-control' id='inputEmail' placeholder='您的邮箱'>
+                                    <input type='email' class='form-control' id='inputEmail' placeholder='您的邮箱' required>
                                 </div>
                                 <div class='form-group'>
-                                    <textarea class='form-control' rows='4' placeholder='您好，有什么疑问可以帮您解答'></textarea>
+                                    <textarea id='inputMessage' class='form-control' rows='4' placeholder='您好，有什么疑问可以帮您解答' required></textarea>
                                 </div>
                                 <div class='form-group'>
-                                    <button class='btn btn-primary'>发送</button>
+                                    <button class='btn btn-primary' type='submit'>发送</button>
                                 </div>
                             </form>
                         </div>">中文服务
                     </span>
-                    <span class="visit">访问量: 88</span>
+                    <span class="visit">访问量: {{visit}}</span>
                 </div>
             </div>
         </div>
@@ -117,32 +123,32 @@
     <div class="basic-info container text-center">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-xs-6 item">
-                <img src="img/img_account_phone@2x.png" alt="电话" />
+                <img src="{% static 'web/img/img_account_phone@2x.png'%}" alt="电话" />
                 <h3>电话</h3>
-                <h4>400-877-1896</h4>
+                <h4>{{user.tel}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
-                <img src="img/img_account_address@2x.png" alt="地址" />
+                <img src="{% static 'web/img/img_account_address@2x.png'%}" alt="地址" />
                 <h3>地址</h3>
-                <h4>厦门市湖里区枋湖东路149号308</h4>
+                <h4>{{user.address}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
-                <img src="img/img_account_website@2x.png" alt="网址" />
+                <img src="{% static 'web/img/img_account_website@2x.png'%}" alt="网址" />
                 <h3>网址</h3>
-                <h4>www.annydiao.com</h4>
+                <h4>{{user.website}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
-                <img src="img/img_account_email@2x.png" alt="邮箱" />
+                <img src="{% static 'web/img/img_account_email@2x.png'%}" alt="邮箱" />
                 <h3>邮箱</h3>
-                <h4>info@annydiao.com</h4>
+                <h4>{{user.email}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
-                <img src="img/img_account_code@2x.png" alt="邮编" />
+                <img src="{% static 'web/img/img_account_code@2x.png'%}" alt="邮编" />
                 <h3>邮编</h3>
-                <h4>100808</h4>
+                <h4>{{user.postid}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item qrcode">
-                <img src="img/img_wechat@2x.png" alt="个人微信" />
+                <img src="{{user.qrcode}}" alt="个人微信" />
                 <h3>个人微信</h3>
             </div>
         </div>
@@ -154,49 +160,50 @@
                 <div class="col-lg-6 col-md-12 ">
                     <div class="text-part">
                         <h2>个人介绍</h2>
-                        <h4>在温哥华地产界，她以房地产置业投资金牌经纪人著称。受理房屋出售时，她擅长高价成交，创造房屋的高额投资回报；代表买家购置房屋时，她也总能帮助买家获取梦寐以求的房源。 她的秘诀来自她在温哥华长期生活的感悟和敏锐的市场洞察。刁安妮来自于中国北方，居住温哥华14年来，先后住过高贵林(Coquitlam)，列治文(Richmond)，温哥华西区(Vancouver
-                            West)，哥伦比亚校园(Campus of British Columbia)，及温哥华市中心(Downtown)等多地的社区。对大温地区房地产价值 “了如指掌”是成为金牌地产经纪人的成功所在。
-                            刁安妮提供专业而致诚的房地产买售服务，对待客户房屋买卖的需求感同身受。长期以来，刁安妮在温哥华西区积累了大量高品质买家、房屋开发商以及拥有各类房...这些温哥华地区的房地产市场资源可以让安妮轻而易举的满足客户的各类购房、卖房需求。从历时40年的历史建筑、具有较高土地价值的房源以及新房和预售房。
-                            作为温哥华金牌地产经纪人，能够您的房屋购置提供高价值服务，做到土地投资保值增值，是温哥华房产置业顾问中的佼佼者。 者。 安妮更打造了一个360度的房地产服务战队。2006年以来，自己作为温哥华地产投资者，安妮结识了房地产中介，律师，会计师和按揭贷款顾问。经过长期合作，这只房地产顾问团帮助客户提供精明的房屋市场策划、贷款建议和房屋检查，更使得众多来自中国、亚洲地区以及海外各地的新移民买家客户语言和政策不熟悉的障碍，完成了在加拿大的土地投资。
-                            “在购买房屋过程中确保资产保值增值、交易成功后又能够令人感到激动不已是我的服务理念”， 安妮愿意和您分享专业的经验，帮您找到适合您及家人的既安全又稳健的房地产投资机会。 安妮热衷瑜伽，喜欢旅行并希望在有生之年能够踏遍世界的每一个角落。她深深的相信帮助别人获得快乐也是令自己快乐的源泉。
+                        <h4>{{user.selfintro}}
                             <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="focus" data-placement="bottom"
-                                title="" data-content="<div>在温哥华地产界，她以房地产置业投资金牌经纪人著称。受理房屋出售时，她擅长高价成交，创造房屋的高额投资回报；代表买家购置房屋时，她也总能帮助买家获取梦寐以求的房源。 她的秘诀来自她在温哥华长期生活的感悟和敏锐的市场洞察。刁安妮来自于中国北方，居住温哥华14年来，先后住过高贵林(Coquitlam)，列治文(Richmond)，温哥华西区(Vancouver
-                                    West)，哥伦比亚校园(Campus of British Columbia)，及温哥华市中心(Downtown)等多地的社区。对大温地区房地产价值 “了如指掌”是成为金牌地产经纪人的成功所在。
-                                    刁安妮提供专业而致诚的房地产买售服务，对待客户房屋买卖的需求感同身受。长期以来，刁安妮在温哥华西区积累了大量高品质买家、房屋开发商以及拥有各类房...这些温哥华地区的房地产市场资源可以让安妮轻而易举的满足客户的各类购房、卖房需求。从历时40年的历史建筑、具有较高土地价值的房源以及新房和预售房。
-                                    作为温哥华金牌地产经纪人，能够您的房屋购置提供高价值服务，做到土地投资保值增值，是温哥华房产置业顾问中的佼佼者。 者。 安妮更打造了一个360度的房地产服务战队。2006年以来，自己作为温哥华地产投资者，安妮结识了房地产中介，律师，会计师和按揭贷款顾问。经过长期合作，这只房地产顾问团帮助客户提供精明的房屋市场策划、贷款建议和房屋检查，更使得众多来自中国、亚洲地区以及海外各地的新移民买家客户语言和政策不熟悉的障碍，完成了在加拿大的土地投资。
-                                    “在购买房屋过程中确保资产保值增值、交易成功后又能够令人感到激动不已是我的服务理念”， 安妮愿意和您分享专业的经验，帮您找到适合您及家人的既安全又稳健的房地产投资机会。 安妮热衷瑜伽，喜欢旅行并希望在有生之年能够踏遍世界的每一个角落。她深深的相信帮助别人获得快乐也是令自己快乐的源泉。
+                                title="" data-content="<div>{{user.selfintro}}
                                 </div>">[查看更多]</div>
                         </h4>
                     </div>
 
                 </div>
                 <div class="col-lg-6 col-md-12">
+                    {% if imgs %}
                     <div id="carousel-agent" class="carousel slide" data-ride="carousel">
+                            
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="img/img_account_top@2x.png" alt="..." width="420">
-                            </div>
-                            <div class="item">
-                                <img src="img/img_account_top@2x.png" alt="..." width="420">
-                            </div>
+                                {% for img in imgs %}
+                                    {% if forloop.first %}
+                                        <div class="item active">
+                                            <img src="{{ img.img }}" alt="" width="420">
+                                        </div>
+                                    {% else %}
+                                        <div class="item">
+                                            <img src="{{ img.img }}" alt="" width="420">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                         </div>
 
                         <!-- Controls -->
                         <a class="left carousel-control" href="#carousel-agent" role="button" data-slide="prev">
-                            <img src="img/ic_left@2x.png" />
+                            <img src="{% static 'web/img/ic_left@2x.png'%}" />
                             <span class="sr-only">Previous</span>
                         </a>
                         <a class="right carousel-control" href="#carousel-agent" role="button" data-slide="next">
-                            <img src="img/ic_right@2x.png" />
+                            <img src="{% static 'web/img/ic_right@2x.png'%}" />
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 <!-- 团队-->
+    {% if user.teamintro %}
     <div class="team-info">
         <div class="container">
             <div class="row vertical-align">
@@ -207,11 +214,7 @@
 
                     <div class="text-part">
                         <h2>团队介绍</h2>
-                        <h4>跨越70年 累积卓越成效 稳居卑诗省地产龙头 传承传统价值核心，秉持专业服务精神 在变化多端的地产市场，协助您处理全方位地产需求 总部设在温哥华西区的麦当劳地产集团，累积超过70年的历史与经验，以名誉卓著的专业地产经纪团队建立高质量服务网络，提供全方位房地产服务，协助客户在卑诗省安家立业，每年完成数十亿元的地产交易。
-                            麦当劳地产集团经纪团队遍布大温哥华、菲沙河谷、海天公路沿线、欧肯那根区、维多利亚和海湾群岛等卑诗省各大小城镇；我们的全方位服务包括：住宅与商业房产买卖、租赁服务、物业管理和贷款服务等。
-                            我们的团队在服务华人客户买卖住宅产业时，发现越来越多的客户将地产投资的目光投向商用地产。大部分商用投资物业都不会在地产销售网上挂牌，全有赖经验丰富的商业地产经纪为客户寻觅投资好机会。 有鉴于此，麦当劳地产集团旗下的麦当劳商业地产有限公司
-                            (Macdonald Commercial Real Estate Services Ltd.) 设有华语专业团队与投资者进行详实沟通。
-                            <div class="read-more">[查看更多]</div>
+                        <h4>{{user.teamintro}}
                         </h4>
                     </div>
 
@@ -220,6 +223,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if user.corpintro %}
 <!-- 公司-->
     <div class="company-info">
         <div class="container">
@@ -228,12 +233,8 @@
                 <div class="col-lg-6 col-md-12 ">
 
                     <div class="text-part">
-                        <h2>团队介绍</h2>
-                        <h4>跨越70年 累积卓越成效 稳居卑诗省地产龙头 传承传统价值核心，秉持专业服务精神 在变化多端的地产市场，协助您处理全方位地产需求 总部设在温哥华西区的麦当劳地产集团，累积超过70年的历史与经验，以名誉卓著的专业地产经纪团队建立高质量服务网络，提供全方位房地产服务，协助客户在卑诗省安家立业，每年完成数十亿元的地产交易。
-                            麦当劳地产集团经纪团队遍布大温哥华、菲沙河谷、海天公路沿线、欧肯那根区、维多利亚和海湾群岛等卑诗省各大小城镇；我们的全方位服务包括：住宅与商业房产买卖、租赁服务、物业管理和贷款服务等。
-                            我们的团队在服务华人客户买卖住宅产业时，发现越来越多的客户将地产投资的目光投向商用地产。大部分商用投资物业都不会在地产销售网上挂牌，全有赖经验丰富的商业地产经纪为客户寻觅投资好机会。 有鉴于此，麦当劳地产集团旗下的麦当劳商业地产有限公司
-                            (Macdonald Commercial Real Estate Services Ltd.) 设有华语专业团队与投资者进行详实沟通。
-                            <div class="read-more">[查看更多]</div>
+                        <h2>公司介绍</h2>
+                        <h4>{{user.corpintro}}
                         </h4>
                     </div>
 
@@ -244,85 +245,49 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if ls %}
     <!-- 房源信息-->
     <div class="sources-list">
         
         <div class="container">
                 <h2>房源信息</h2>
             <div class="row">
-                <div class="col-lg-3 item">
-                    <img src="img/img_account_top@2x.png" width="234" height="154" />
-                    <h3>$2,188,000 | 2,109 sqft.adadadadadadadadadadad</h3>
-                    <h4>NorthVancouver House/Single Familyadaddadadadadadadadadadadad</h4>
-                    <span class="views">20</span>
-                    <span class="time">2018-04-20</span>
-                </div>
-                <div class="col-lg-3 item">
-                    <img src="img/img_account_top@2x.png" width="234" height="154" />
-                    <h3>$2,188,000 | 2,109 sqft.</h3>
-                    <h4>NorthVancouver House/Single Family</h4>
-                    <span class="views">20</span>
-                    <span class="time">2018-04-20</span>
-                </div>
-                <div class="col-lg-3 item">
-                    <img src="img/img_account_top@2x.png" width="234" height="154" />
-                    <h3>$2,188,000 | 2,109 sqft.</h3>
-                    <h4>NorthVancouver House/Single Family</h4>
-                    <span class="views">20</span>
-                    <span class="time">2018-04-20</span>
-                </div>
-                <div class="col-lg-3 item">
-                    <img src="img/img_account_top@2x.png" width="234" height="154" />
-                    <h3>$2,188,000 | 2,109 sqft.</h3>
-                    <h4>NorthVancouver House/Single Family</h4>
-                    <span class="views">20</span>
-                    <span class="time">2018-04-20</span>
-                </div>
+                {% for item in ls %}
+                    <div class="col-lg-3 item">
+                        <a href="{{item.url}}"><img src="item.img" width="234" height="154" />
+                            <h3>${{ls.price}} | {{ls.areas}} sqft.</h3>
+                            <h4>{{ls.cityname}} / {{ls.housetype}}</h4>
+                            <span class="views">{{ls.visit}}</span>
+                            <span class="time">{{ls.date}}</span>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
-
         </div>
-
     </div>
+    {% endif %}
+    {% if atc %}
 <!-- 相关阅读-->
     <div class="related-readings">
         <div class="container">
             <h2>相关阅读</h2>
             <div class="row">
-                <div class="col-lg-6 item">
-                    <div class="col-lg-4"><img src="img/img_account_top@2x.png"/></div>
-                    <div class="col-lg-8">
-                        <h3>[内参]机会在哪里？2017大温哥华核心城市公寓楼花市场展望</h3>
-                        <h4>RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温</h4>
-                        <div class="read-more">查看详情>></div>
-                    </div>
-                </div>
-                <div class="col-lg-6 item">
-                        <div class="col-lg-4"><img src="img/img_account_top@2x.png"/></div>
-                        <div class="col-lg-8">
-                            <h3>[内参]机会在哪里？2017大温哥华核心城市公寓楼花市场展望</h3>
-                            <h4>RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温</h4>
-                            <div class="read-more">查看详情>></div>
-                        </div>
-                    </div>
+                {% for item in atc %}
                     <div class="col-lg-6 item">
-                            <div class="col-lg-4"><img src="img/img_account_top@2x.png"/></div>
-                            <div class="col-lg-8">
-                                <h3>[内参]机会在哪里？2017大温哥华核心城市公寓楼花市场展望</h3>
-                                <h4>RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温</h4>
-                                <div class="read-more">查看详情>></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 item">
-                                <div class="col-lg-4"><img src="img/img_account_top@2x.png"/></div>
-                                <div class="col-lg-8">
-                                    <h3>[内参]机会在哪里？2017大温哥华核心城市公寓楼花市场展望</h3>
-                                    <h4>RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温RBC加拿大皇家银行最新的房屋指数报告把温</h4>
-                                    <div class="read-more">查看详情>></div>
-                                </div>
-                            </div>
+                        <a href="{{item.url}}"><div class="col-lg-4"><img src="{{item.img}}"/></div>
+                        <div class="col-lg-8">
+                            <h3>{{item.title}}</h3>
+                            <h4>{{item.intro}}</h4>
+                            <div class="read-more">查看详情>></div>
+                        </div></a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+    {% endif %}
+    
     <hr />
 
     <div class="fixed-options">
@@ -377,12 +342,14 @@
     </footer>
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="main.js"></script>
+    <script src="js/main.js"></script> -->
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'web/js/main.js' %}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
     <script>

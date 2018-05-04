@@ -75,6 +75,7 @@ footer h4 {
   padding: 39px 49px;
   width: 428px;
   height: 457px;
+  position: relative;
 }
 #formRegister h4 {
   color: #999;
@@ -141,6 +142,11 @@ footer h4 {
   background-position: center right;
   background-size: 18px;
   padding-right: 24px;
+}
+#formRegister #error-info {
+  position: absolute;
+  bottom: 170px;
+  left: 49px;
 }
 .feature {
   background: white;
@@ -211,7 +217,7 @@ footer h4 {
   .btn-back {
     margin-top: 20px;
   }
-  #formLogin {
+  #formRegister {
     width: auto;
     height: auto;
     padding: 20px 10px;
