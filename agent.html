@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load staticfiles %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Realtoraccess</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/agent.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}"> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agent.css" rel="stylesheet">
 
 </head>
 
@@ -53,18 +53,16 @@
                     <li>
                         <a href="#">全球资讯</a>
                     </li>
-                    <a class="not-login" href="login.html">Agent? Log in</a>
+                    <a class="not-login" href="/web/page/signin/">Agent? Log in</a>
                     <a class="not-login"> | </a>
-                    <a class="not-login" href="register.html">Sign up</a>
+                    <a class="not-login" href="/web/page/signup/">Sign up</a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="top" {% if user.logo%} 
-        style="background-image: url({{user.logo}});" 
-        {% endif %}>
+    <div class="top">
         <div class="container">
             <div class="share-options">
                 <button class="btn-share facebook"></button>
@@ -74,14 +72,14 @@
         </div>
         <div class="container title-info">
             <div class="col-lg-6 text-left">
-                <img class="avatar" src="{{user.head}}" width="122" />
+                <img class="avatar" src="{{user.head.url}}" width="122" />
                 <div class="name">
                     <h1>{{user.username}}
                         {% if auth == 1 %}
                             <img class="authenticated" src="{% static 'web/img/img_sign_renzheng@2x.png'%}" width="90" />
                         {% endif %}
                     </h1>
-                    <h4 class="city">{{user.group}}经纪
+                    <h4 class="city">{{user.city}}经纪
                         <span class="company"> | {{user.corp}}</span>
                     </h4>
                 </div>
@@ -91,12 +89,12 @@
                     <h2>{{user.note}}</h2>
                     <span class="service" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="bottom"
                         title="" data-content="<div>
-                            <img class='avatar' src='{{user.head2}}' width='77'/>
+                            <img class='avatar' src='{{user.head2.url}}' width='77'/>
                             <div class='info'>
                                     <h2>{{user.username2}}</h2>
                                     <p>电话: {{user.tel2}}</p>
                                     <p>邮箱: {{user.email2}}</p>
-                                    <p>微信: <img src='{{user.qrcode2}}' width='62'/></p>
+                                    <p>微信: <img src='{{user.qrcode2.url}}' width='62'/></p>
                             </div>
                             <form id='formMessage'>
                                 <input type='hidden' class='form-control' id='userid' value='{{user.userid}}'>
@@ -148,7 +146,7 @@
                 <h4>{{user.postid}}</h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item qrcode">
-                <img src="{{user.qrcode}}" alt="个人微信" />
+                <img src="{{user.qrcode.url}}" alt="个人微信" />
                 <h3>个人微信</h3>
             </div>
         </div>
@@ -208,7 +206,7 @@
         <div class="container">
             <div class="row vertical-align">
                 <div class="col-lg-6 col-md-12">
-                    <img width="420" height="420" src="img/img_team@2x.png"/>
+                    <img width="420" height="420" src="{% static 'web/img/img_team@2x.png'%}"/>
                 </div>
                 <div class="col-lg-6 col-md-12 ">
 
@@ -240,7 +238,7 @@
 
                 </div>
                 <div class="col-lg-6 col-md-12 text-right">
-                        <img width="420" height="420" src="img/img_company@2x.png"/>
+                        <img width="420" height="420" src="{% static 'web/img/img_company@2x.png'%}"/>
                 </div>
             </div>
         </div>
@@ -255,11 +253,11 @@
             <div class="row">
                 {% for item in ls %}
                     <div class="col-lg-3 item">
-                        <a href="{{item.url}}"><img src="item.img" width="234" height="154" />
-                            <h3>${{ls.price}} | {{ls.areas}} sqft.</h3>
-                            <h4>{{ls.cityname}} / {{ls.housetype}}</h4>
-                            <span class="views">{{ls.visit}}</span>
-                            <span class="time">{{ls.date}}</span>
+                        <a href="{{item.url}}"><img src="{{item.img}}" width="234" height="154" />
+                            <h3>{{item.price}} | {{item.areas}}</h3>
+                            <h4>{{item.cityname}} / {{item.housetype}}</h4>
+                            <span class="views">{{item.visit}}</span>
+                            <span class="time">{{item.date}}</span>
                         </a>
                     </div>
                 {% endfor %}
@@ -288,23 +286,32 @@
     </div>
     {% endif %}
     
+	<!-- 畅言 -->
+    <!-- <div id="SOHUCS" sid="{{user.userid}}"></div>
+		<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+		<script type="text/javascript">
+		window.changyan.api.config({
+		appid: 'cysXORHcH',
+		conf: 'prod_61dabef4b02df9cf71bd14e33fba4d86'
+		});
+		</script> -->
     <hr />
 
     <div class="fixed-options">
-        <div class="btn-option"><a href="https://www.fangdaijisuanqi.com/" target="_blank"><img src="img/img_right_01@2x.png" /></a></div>
-        <div class="btn-option wechat"><img src="img/img_right_02@2x.png"/></div>
-        <div class="btn-option"><a href="http://ruianju.kuaizhan.com/clubv2/forums/WNPMtTEF8TSeToY_" target="_blank"><img src="img/img_right_03@2x.png" /></a></div>
-        <div class="btn-option"><a href="http://www.huilvwang.com/" target="_blank"><img src="img/img_right_04@2x.png" /></a></div>
-        <div class="btn-option backTop"><img src="img/img_right_top@2x.png" /></div>
+        <div class="btn-option"><a href="https://www.fangdaijisuanqi.com/" target="_blank"><img src="{% static 'web/img/img_right_01@2x.png' %}" /></a></div>
+        <div class="btn-option wechat"><img src="{% static 'web/img/img_right_02@2x.png' %}"/></div>
+        <div class="btn-option"><a href="http://ruianju.kuaizhan.com/clubv2/forums/WNPMtTEF8TSeToY_" target="_blank"><img src="{% static 'web/img/img_right_03@2x.png' %}" /></a></div>
+        <div class="btn-option"><a href="http://www.huilvwang.com/" target="_blank"><img src="{% static 'web/img/img_right_04@2x.png' %}" /></a></div>
+        <div class="btn-option backTop"><img src="{% static 'web/img/img_right_top@2x.png' %}"" /></div>
         
     </div>
-    <div id="wechat-qrcode"><img src="img/kefu.png"/></div>
+    <div id="wechat-qrcode"><img src="{% static 'web/img/kefu.png' %}""/></div>
     <footer>
         <div class="container footer-top">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="logo">
-                        <img src="img/img_bottom_logo@2x.png"/>
+                        <img src="{% static 'web/img/img_bottom_logo@2x.png' %}""/>
                         <h2>首创全球无忧置业信息服务平台</h2>
                         <h4>海外瑞安居（简称“瑞安居”），<a href="http://www.realtoraccess.com/">www.瑞安居.com</a>，面向全球华人提供最新、最全海外房产置业投资信息，汇集了美国、澳大利亚、加拿大、英国主要城市MLS二手房源、海外置业中介房源，
                             海外房产经纪暗盘，期房楼花新盘以及海外短租房源。让全球华人可以查询海外主要城市房价、实时跟踪海外房源价格走势。集成视频、3D、户型图以及房源照片等房源详情信息，通过<a href="http://www.realtoraccess.com/web/houselist/">海外房源网页</a>全面进行展示，
@@ -320,7 +327,7 @@
                     <p class="phone">客服专线 | <a href="tel:4008771896">400 877 1896</a></p>
                     <p class="time">营业时间 | 周一至周日 9:00~17:00</p>
                     <p class="email">客服邮箱 | <a href="mailto:clientservice@realtoraccess.com">clientservice@realtoraccess.com</a></p>
-                    <img src="img/img_wechat@2x.png" />
+                    <img src="{% static 'web/img/img_wechat@2x.png' %}"" />
                 </div>
             </div>
         </div>
@@ -342,14 +349,14 @@
     </footer>
 
 
-    <!-- <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="js/main.js"></script> -->
-    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
-    <script src="{% static 'web/js/main.js' %}"></script>
+    <script src="{% static 'web/js/main.js' %}"></script> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
     <script>
