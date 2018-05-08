@@ -222,7 +222,8 @@ h4 {
   font-weight: 400;
   max-height: 255px;
   overflow: hidden;
-  text-indent: 2em;
+  /*modified by yujiahao*/
+  /*text-indent: 2em;*/
 }
 h4 .read-more {
   position: absolute;
@@ -615,6 +616,10 @@ h4 .read-more {
   .sources-list {
     padding-top: 20px;
     padding-bottom: 20px;
+
+    text-align: left;
+  }
+  .sources-list h2{
     text-align: center;
   }
   .sources-list .item {
@@ -646,6 +651,15 @@ h4 .read-more {
   .footer-top .logo h2 {
     display: block;
   }
+  .logo{
+    text-align: center;
+  }
+  .contact{
+    text-align: center;
+  }
+  .footer-top .contact p{
+    padding-left: 0px;
+  }
   .footer-top .contact {
     padding-left: 15px;
   }
@@ -655,4 +669,11 @@ h4 .read-more {
   .fixed-options {
     display: none;
   }
+
+
+  /*modified by yujiahao*/
+  .text-left,.text-right{
+    text-align: center;
+  }
+
 }

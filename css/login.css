@@ -2,6 +2,7 @@ html {
   font-size: 20px;
   padding: 0;
   margin: 0;
+  font-family: "SourceHanSansCN",  "Helvetica", "PingFang SC", "Microsoft YaHei";
 }
 .row {
   margin-left: 0;
