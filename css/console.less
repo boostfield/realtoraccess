@@ -127,6 +127,7 @@ hr {
   margin: 30px 80px;
   width: 160px;
   color: white;
+  border-radius: 2px;
 }
 .el-button.btn-preview {
   background: #32363F;
@@ -185,6 +186,26 @@ hr {
   .el-tabs__active-bar {
     background-color: @main-color;
   }
+}
+.el-dialog .el-button--primary {
+  color: white;
+  background: @main-color;
+  border-color: @main-color;
+}
+.el-dialog .el-button.el-button--text {
+  color: @text-color;
+}
+.el-time-panel__btn.confirm {
+  color: @main-color;
+}
+.el-date-table td.current:not(.disabled) span {
+  background-color: @main-color;
+}
+.el-date-table td.today span{
+  color: @main-color;
+}
+.el-date-table td.available:hover {
+  color: @main-color;
 }
 #page-dashboard {
   .container {
@@ -318,6 +339,25 @@ hr {
         }
       }
     }
+    .hint {
+      color: #cbcbcb;
+      font-size: 0.7rem;
+    }
+    .invoice-list {
+      .item {
+        margin-top: 20px;
+      }
+    }
   }
-  
+  .payment-dialog {
+    .el-dialog__header {
+      background-image: url('../img/img_payment@2x.png');
+      background-position: right 35px center;
+      background-repeat: no-repeat;
+      background-size: 222px 25px;
+    }
+    .el-dialog__title {
+      font-weight: bold;
+    }
+  } 
 }

@@ -1,321 +1,317 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>个人信息-瑞安居</title>
+  <title>Realtoraccess</title>
   <link rel="stylesheet" href="css/element.css">
   <link rel="stylesheet" href="css/console.css">
 </head>
 
 <body>
   <div id="app" v-cloak>
-      <div class="left-side">
-        <el-menu mode="vertical"
-          class="vertical-nav"
-          :router="false"
-          :unique-opened="true"
-          :default-active="activeIndex"
-          @select="selectMenu"
-          background-color="#32363f"
-          text-color="#747e92"
-          active-text-color="#fff">
-          <div>
-            <img class="nav-logo" src="img/img_nav_logo_console@2x.png" width="147"/>
-            <el-menu-item index="1" class="menu-dashboard">
-              <span slot="title">DASHBOARD</span>
-            </el-menu-item>
-            <el-menu-item index="2" class="menu-agent">
-              <span slot="title">AGENT PAGE</span>
-            </el-menu-item>
-            <el-menu-item index="3" class="menu-properties">
-              <span slot="title">PROPERTIES</span>
-            </el-menu-item>
-            <el-menu-item index="4" class="menu-billing">
-              <span slot="title">BILLING</span>
-            </el-menu-item>
-            <el-menu-item index="5" class="menu-password">
-              <span slot="title">PASSWORD</span>
-            </el-menu-item>
-          </div>
-        </el-menu>
+    <div class="left-side">
+      <el-menu mode="vertical" class="vertical-nav" :router="false" :unique-opened="true" :default-active="activeIndex" @select="selectMenu"
+        background-color="#32363f" text-color="#747e92" active-text-color="#fff">
+        <div>
+          <img class="nav-logo" src="img/img_nav_logo_console@2x.png" width="147" />
+          <el-menu-item index="1" class="menu-dashboard">
+            <span slot="title">DASHBOARD</span>
+          </el-menu-item>
+          <el-menu-item index="2" class="menu-agent">
+            <span slot="title">AGENT PAGE</span>
+          </el-menu-item>
+          <el-menu-item index="3" class="menu-properties">
+            <span slot="title">PROPERTIES</span>
+          </el-menu-item>
+          <el-menu-item index="4" class="menu-billing">
+            <span slot="title">BILLING</span>
+          </el-menu-item>
+          <el-menu-item index="5" class="menu-password">
+            <span slot="title">PASSWORD</span>
+          </el-menu-item>
+        </div>
+      </el-menu>
+    </div>
+    <div class="right-side">
+      <div id="page-dashboard" v-show="activeIndex == 1">
+        <div class="header">
+          <h1>At Realtoraccess, there is no technical or Chinese language skill required. We will edit all the information for
+            you on your webpage. Access to the Chinese market made easy! Click the chat icon to get connected!</h1>
+        </div>
+        <div class="container">
+          <h2>Profile</h2>
+          <hr />
+          <el-form ref="profile" label-position="left" label-width="120px" :rules="profileRules" :model="profile">
+            <el-form-item label="E-mail Address">
+              <el-input v-model="profile.email"></el-input>
+            </el-form-item>
+            <el-form-item label="First Name" prop="fname">
+              <el-input v-model="profile.fname"></el-input>
+            </el-form-item>
+            <el-form-item label="Last Name" prop="lname">
+              <el-input v-model="profile.lname"></el-input>
+            </el-form-item>
+            <el-form-item label="Address">
+              <el-input v-model="profile.email"></el-input>
+            </el-form-item>
+            <el-form-item label="ZIP code">
+              <el-input v-model="profile.postid"></el-input>
+            </el-form-item>
+            <el-form-item label="Avatar (1:1)">
+              <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
+                :on-success="handleAvatarSuccess" :on-remove="handleImageRemove" :data="uploadData" name="head" :file-list="user.headImage">
+                <el-button type="primary" size="medium">Upload</el-button>
+              </el-upload>
+            </el-form-item>
+          </el-form>
+        </div>
+        <el-button type="primary" class="btn-primary" @click="submitProfileForm">Save</el-button>
       </div>
-      <div class="right-side">
-        <div id="page-dashboard" v-show="activeIndex == 1">
-          <div class="header">
-            <h1>At Realtoraccess, there is no technical or Chinese language skill required. We will edit all the information for you on your webpage.
-                Access to the Chinese market made easy!  Click the chat icon to get connected!</h1>
-          </div>
-          <div class="container">
-            <h2>Profile</h2>
-            <hr />
-            <el-form
-              ref="profile"
-              label-position="left"
-              label-width="120px"
-              :rules="profileRules"
-              :model="profile">
-                <el-form-item label="E-mail Address">
-                    <el-input v-model="profile.email"></el-input>
+      <!--经纪人信息-->
+      <div id="page-agent" v-show="activeIndex == 2">
+        <div class="container">
+          <el-form ref="agent" :model="agent" label-width="130px" label-position="left">
+            <el-tabs v-model="agentTabActiveIndex">
+              <el-tab-pane label="Contact Info" name="agent1">
+                <el-row>
+                  <el-select v-model="agent.country" @change="countryChange" placeholder="Country">
+                    <el-option v-for="item in countryList" :key="item.countryid" :label="item.countryid" :value="item.countryid">
+                    </el-option>
+                  </el-select>
+                  <el-select v-if="agent.country" v-model="agent.prov" @change="provChange" placeholder="Province">
+                    <el-option v-for="item in provList" :key="item.provid" :label="item.provid" :value="item.provid">
+                    </el-option>
+                  </el-select>
+                  <el-select v-if="agent.prov" v-model="agent.group" @change="groupChange" placeholder="Group">
+                    <el-option v-for="item in groupList" :key="item.groupid" :label="item.groupid" :value="item.groupid">
+                    </el-option>
+                  </el-select>
+                  <el-select v-if="agent.group" v-model="agent.city" @change="cityChange" placeholder="City">
+                    <el-option v-for="item in cityList" :key="item.cityid" :label="item.cityid" :value="item.cityid">
+                    </el-option>
+                  </el-select>
+                </el-row>
+                <el-form-item label="Phone">
+                  <el-input v-model="agent.tel" placeholder=""></el-input>
                 </el-form-item>
-                <el-form-item label="First Name" prop="fname">
-                    <el-input v-model="profile.fname"></el-input>
+                <el-form-item label="Company">
+                  <el-input v-model="agent.corp" placeholder=""></el-input>
                 </el-form-item>
-                <el-form-item label="Last Name" prop="lname">
-                    <el-input v-model="profile.lname"></el-input>
+                <el-form-item label="Website">
+                  <el-input v-model="agent.website" placeholder=""></el-input>
                 </el-form-item>
-                <el-form-item label="Address">
-                    <el-input v-model="profile.email"></el-input>
+                <el-form-item label="QRCode">
+                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
+                    :on-success="handleQRCodeSuccess" :on-remove="handleImageRemove" :data="uploadData" name="qrcode" :file-list="user.qrcodeImage">
+                    <el-button type="primary" size="medium">Upload</el-button>
+                  </el-upload>
                 </el-form-item>
-                <el-form-item label="ZIP code">
-                    <el-input v-model="profile.postid"></el-input>
+                <el-form-item label="My Slogan">
+                  <el-input v-model="agent.note" placeholder=""></el-input>
                 </el-form-item>
+                <el-form-item label="About Me">
+                  <el-input v-model="agent.selfintro" placeholder=""></el-input>
+                </el-form-item>
+                <el-form-item label="Photo (1:1)">
+                  <el-upload class="photo-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
+                    :on-success="handlePhotoSuccess" :on-remove="handleImageRemove" :data="uploadData" name="agent" :file-list="user.photoImages">
+                    <i class="el-icon-plus"></i>
+                  </el-upload>
+                </el-form-item>
+
+              </el-tab-pane>
+              <el-tab-pane label="My Company" name="agent2">
+                <el-form-item label="My Team">
+                  <el-input type="textarea" v-model="agent.teamintro" :rows="4"></el-input>
+                </el-form-item>
+                <el-form-item label="My Company">
+                  <el-input type="textarea" v-model="agent.corpintro" :rows="4"></el-input>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane label="My Co-agent" name="agent3">
                 <el-form-item label="Avatar (1:1)">
-                    <el-upload
-                      class="avatar-uploader"
-                      action="http://www.realtoraccess.com/web/postimg/"
-                      list-type="picture-card"
-                      multiple="false"
-                      :on-success="handleAvatarSuccess"
-                      :on-remove="handleImageRemove"
-                      :data="uploadData"
-                      name="head"
-                      :file-list="user.headImage">
-                      <el-button type="primary" size="medium">Upload</el-button>
-                    </el-upload>
-                  </el-form-item>
-            </el-form>
-          </div>
-          <el-button type="primary" class="btn-primary" @click="submitProfileForm">Save</el-button>
+                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
+                    :on-success="handleAvatar2Success" :on-remove="handleImageRemove" :data="uploadData" name="head2" :file-list="user.head2Image">
+                    <el-button type="primary" size="medium">Upload</el-button>
+                  </el-upload>
+                </el-form-item>
+                <el-form-item label="Name">
+                  <el-input v-model="agent.username2"></el-input>
+                </el-form-item>
+                <el-form-item label="Phone">
+                  <el-input v-model="agent.tel2"></el-input>
+                </el-form-item>
+                <el-form-item label="E-mail">
+                  <el-input v-model="agent.email2"></el-input>
+                </el-form-item>
+                <el-form-item label="QRCode">
+                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
+                    :on-success="handleQRCode2Success" :on-remove="handleImageRemove" :data="uploadData" name="qrcode2" :file-list="user.qrcode2Image">
+                    <el-button type="primary" size="medium">Upload</el-button>
+                  </el-upload>
+                </el-form-item>
+              </el-tab-pane>
+            </el-tabs>
+          </el-form>
         </div>
-        <!--经纪人信息-->
-        <div id="page-agent" v-show="activeIndex == 2">
-          <div class="container">
-              <el-form ref="agent" :model="agent" label-width="130px" label-position="left">
-              <el-tabs v-model="agentTabActiveIndex">
-                  <el-tab-pane label="Contact Info" name="agent1">
-                        <el-row>
-                            <el-select v-model="agent.country" @change="countryChange" placeholder="Country">
-                                <el-option v-for="item in countryList" :key="item.countryid" :label="item.countryid" :value="item.countryid">
-                                </el-option>
-                              </el-select>
-                              <el-select v-if="agent.country" v-model="agent.prov" @change="provChange" placeholder="Province">
-                                <el-option v-for="item in provList" :key="item.provid" :label="item.provid" :value="item.provid">
-                                </el-option>
-                              </el-select>
-                              <el-select v-if="agent.prov" v-model="agent.group" @change="groupChange" placeholder="Group">
-                                <el-option v-for="item in groupList" :key="item.groupid" :label="item.groupid" :value="item.groupid">
-                                </el-option>
-                              </el-select>
-                              <el-select v-if="agent.group" v-model="agent.city" @change="cityChange" placeholder="City">
-                                <el-option v-for="item in cityList" :key="item.cityid" :label="item.cityid" :value="item.cityid">
-                                </el-option>
-                              </el-select>
-                          </el-row>
-                          <el-form-item label="Phone">
-                            <el-input v-model="agent.tel" placeholder=""></el-input>
-                          </el-form-item>
-                          <el-form-item label="Company">
-                              <el-input v-model="agent.corp" placeholder=""></el-input>
-                          </el-form-item>
-                          <el-form-item label="Website">
-                              <el-input v-model="agent.website" placeholder=""></el-input>
-                          </el-form-item>
-                          <el-form-item label="QRCode">
-                              <el-upload
-                                class="avatar-uploader"
-                                action="http://www.realtoraccess.com/web/postimg/"
-                                list-type="picture-card"
-                                multiple="false"
-                                :on-success="handleQRCodeSuccess"
-                                :on-remove="handleImageRemove"
-                                :data="uploadData"
-                                name="qrcode"
-                                :file-list="user.qrcodeImage">
-                                <el-button type="primary" size="medium">Upload</el-button>
-                              </el-upload>
-                            </el-form-item>
-                            <el-form-item label="My Slogan">
-                                <el-input v-model="agent.note" placeholder=""></el-input>
-                            </el-form-item>
-                            <el-form-item label="About Me">
-                                <el-input v-model="agent.selfintro" placeholder=""></el-input>
-                            </el-form-item>
-                            <el-form-item label="Photo (1:1)">
-                                <el-upload
-                                  class="photo-uploader"
-                                  action="http://www.realtoraccess.com/web/postimg/"
-                                  list-type="picture-card"
-                                  multiple="false"
-                                  :on-success="handlePhotoSuccess"
-                                  :on-remove="handleImageRemove"
-                                  :data="uploadData"
-                                  name="agent"
-                                  :file-list="user.photoImages">
-                                  <i class="el-icon-plus"></i>
-                                </el-upload>
-                              </el-form-item>
-                    
-                  </el-tab-pane>
-                  <el-tab-pane label="My Company" name="agent2">
-                      <el-form-item label="My Team">
-                          <el-input type="textarea" v-model="agent.teamintro" :rows="4"></el-input>
-                        </el-form-item>
-                        <el-form-item label="My Company">
-                            <el-input type="textarea" v-model="agent.corpintro" :rows="4"></el-input>
-                          </el-form-item>
-                  </el-tab-pane>
-                  <el-tab-pane label="My Co-agent" name="agent3">
-                      <el-form-item label="Avatar (1:1)">
-                          <el-upload
-                            class="avatar-uploader"
-                            action="http://www.realtoraccess.com/web/postimg/"
-                            list-type="picture-card"
-                            multiple="false"
-                            :on-success="handleAvatar2Success"
-                            :on-remove="handleImageRemove"
-                            :data="uploadData"
-                            name="head2"
-                            :file-list="user.head2Image">
-                            <el-button type="primary" size="medium">Upload</el-button>
-                          </el-upload>
-                        </el-form-item>
-                        <el-form-item label="Name">
-                          <el-input v-model="agent.username2"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Phone">
-                          <el-input v-model="agent.tel2"></el-input>
-                        </el-form-item>
-                        <el-form-item label="E-mail">
-                          <el-input v-model="agent.email2"></el-input>
-                        </el-form-item>
-                        <el-form-item label="QRCode">
-                            <el-upload
-                              class="avatar-uploader"
-                              action="http://www.realtoraccess.com/web/postimg/"
-                              list-type="picture-card"
-                              multiple="false"
-                              :on-success="handleQRCode2Success"
-                              :on-remove="handleImageRemove"
-                              :data="uploadData"
-                              name="qrcode2"
-                              :file-list="user.qrcode2Image">
-                              <el-button type="primary" size="medium">Upload</el-button>
-                            </el-upload>
-                          </el-form-item>
-                  </el-tab-pane>
-                </el-tabs>
-              </el-form>
+        <el-button class="btn-primary" @click="submitAgentForm">Save</el-button>
+        <el-button class="btn-preview">Preview</el-button>
+
+      </div>
+      <!--房源信息-->
+      <div id="page-properties" v-show="activeIndex == 3">
+        <div class="container">
+          <h2>Manage Properties</h2>
+          <el-button class="btn-primary" size="medium">Live Demos</el-button>
+          <hr />
+          <div class="property-list">
+            <div class="item" v-for="property in propertyList" v-bind:key="property.mls">
+              <table>
+                <tr>
+                  <td width="100" class="name">Property ID</td>
+                  <td width="154" class="content">[[property.mls]]</td>
+                  <td width="111" class="name">Listing URL</td>
+                  <td width="555" class="content">[[property.url]]</td>
+                </tr>
+                <tr>
+                  <td class="name">Listing views</td>
+                  <td class="content">[[property.visit]]</td>
+                  <td class="name">Viewer Report</td>
+                  <td class="content">[[property.consoleurl]]</td>
+                </tr>
+                <tr>
+                  <td class="name">Date</td>
+                  <td class="content">[[property.date]]</td>
+                  <td class="name">Open house</td>
+                  <td class="content">[[formatOpenDate(property.opendate1)]]
+                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)">update</el-button>
+                    [[formatOpenDate(property.opendate2)]]
+                    <el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
-          <el-button class="btn-primary" @click="submitAgentForm">Save</el-button>
-          <el-button class="btn-preview">Preview</el-button>
-          
+
+          <el-dialog title="Open House Date Range" :visible.sync="openHouseDateDialogVisible" width="500px">
+            <el-form ref="openDate" :model="openDateForm">
+              <el-row>
+                <el-date-picker v-model="openDateForm.currentDate" type="date" placeholder="date" value-format="yyyyMMdd">
+                </el-date-picker>
+                <el-time-picker v-model="openDateForm.currentTime1" placeholder="begin time" value-format="HHmmss">
+                </el-time-picker>
+                <el-time-picker v-model="openDateForm.currentTime2" placeholder="end time" value-format="HHmmss">
+                </el-time-picker>
+              </el-row>
+          </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="openHouseDateDialogVisible = false" type="text" size="small">cancel</el-button>
+              <el-button type="primary" @click="confirmOpenHouseDate" size="small">Done</el-button>
+            </span>
+          </el-dialog>
         </div>
-        <!--房源信息-->
-        <div id="page-properties" v-show="activeIndex == 3">
-          <div class="container">
-              <h2>Manager Properties</h2>
-              <el-button class="btn-primary" size="medium">Live Demos</el-button>
-              <hr />
-              <div class="property-list">
-                <div class="item" v-for="property in propertyList" v-bind:key="property.MLS">
-                  <table>
-                    <tr>
-                      <td width="100" class="name">Property ID</td>
-                      <td width="154" class="content">[[property.MLS]]</td>
-                      <td width="111" class="name">Listing URL</td>
-                      <td width="555" class="content">[[property.url]]</td>
-                    </tr>
-                    <tr>
-                      <td class="name">Listing views</td>
-                      <td class="content">[[property.visit]]</td>
-                      <td class="name">Viewer Report</td>
-                      <td class="content">[[property.consoleurl]]</td>
-                    </tr>
-                    <tr>
-                        <td class="name">Date</td>
-                        <td class="content">[[property.date]]</td>
-                        <td class="name">Open house</td>
-                        <td class="content">[[property.opendate1]]<el-button size="mini" @click="showOpenHouseDateDialog(property.MLS, property.opendate1)">update</el-button>
-                          [[property.opendate2]]<el-button size="mini" @click="showOpenHouseDateDialog(property.MLS, property.opendate2)">update</el-button></td>
-                    </tr>
-                  </table>
+
+      </div>
+      <!--信用卡信息-->
+      <div id="page-billing" v-show="activeIndex == 4">
+        <div class="container">
+          <el-tabs v-model="billingTabActiveName">
+            <el-tab-pane label="Payment Method" name="billing1">
+              <div class="credit-card-list">
+                <div class="item">
+                  <h2>[[creditCard.cardno]]</h2>
+                  <h3>Name<span>[[creditCard.holder]]</span></h3>
+                  <h3>Expiration<span>[[creditCard.expire]]</span>
+                  </h3>
                 </div>
               </div>
+            </el-tab-pane>
+            <el-tab-pane label="Invoice" name="billing2">
+              <div class="hint">If you have multiple services, these invoices are a summary of all your charges.</div>
+              <div class="invoice-list">
+                <div class="item" v-for="order in orderList">
+                  <div class="card-number">[[order.cardno]]</div>
+                  <el-table
+                    :data="order.records"
+                    style="width: 100%">
+                    <el-table-column
+                      prop="fee"
+                      label="Amount"
+                      width="180">
+                    </el-table-column>
+                    <el-table-column
+                      prop="status"
+                      label="Status"
+                      width="180">
+                    </el-table-column>
+                    <el-table-column
+                      prop="date"
+                      label="Date">
+                    </el-table-column>
+                    <el-table-column
+                      label="Actions">
+                      <template slot-scope="scope">
+                        <a :href="scope.row.invoice">[[scope.row.invoice]]</a>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                </div>
+              </div>
+              
+            </el-tab-pane>
+          </el-tabs>
 
-              <el-dialog
-                title="Open House Date Range"
-                :visible.sync="openHouseDateDialogVisible"
-                width="439px">
-                <el-row>
-                  <label>From: </label>
-                  <el-date-picker
-                    v-model="currentBeginDate1"
-                    type="date"
-                    placeholder="date">
-                  </el-date-picker>
-                  <el-time-picker
-                    v-model="currentBeginTime1"
-                    placeholder="time">
-                  </el-time-picker>
-                </el-row>
-                <el-row>
-                    <label>To: </label>
-                    <el-date-picker
-                      v-model="currentEndDate1"
-                      type="date"
-                      placeholder="date">
-                    </el-date-picker>
-                    <el-time-picker
-                      v-model="currentEndTime1"
-                      placeholder="time">
-                    </el-time-picker>
-                  </el-row>
-                <span slot="footer" class="dialog-footer">
-                  <el-button @click="openHouseDateDialogVisible = false">cancel</el-button>
-                  <el-button type="primary" @click="confirmOpenHouseDate">Done</el-button>
-                </span>
-              </el-dialog>
-          </div>
-          
-        </div>
-        <!--信用卡信息-->
-        <div id="page-billing" v-show="activeIndex == 4">
-          <div class="container">
-              <el-tabs v-model="billingTabActiveName">
-                  <el-tab-pane label="Payment Method" name="billing1">
-                    <div class="credit-card-list">
-                      <div class="item">
-                        <h2>20834******3698</h2>
-                        <h3>Name <span>zhouqiu</span></h3>
-                        <h3>Expiration <span>04-05</span></h3>
-                      </div>
-                    </div>
-                  </el-tab-pane>
-                  <el-tab-pane label="Invoice" name="billing2">
 
-                  </el-tab-pane>
-              </el-tabs>
-          </div>
-          <el-button class="btn-primary">
-            Update
-          </el-button>
         </div>
+        <el-button class="btn-primary" @click="paymentMethodDialogVisible = true">
+          Update
+        </el-button>
+        <el-dialog title="Payment Methods" :visible.sync="paymentMethodDialogVisible" width="615px" custom-class="payment-dialog"
+          :show-close="false">
+          <el-form ref="payment" :model="paymentForm" :rules="paymentRules" label-position="left" label-width="124px">
+            <el-form-item label="Name on card" prop="holder">
+              <el-input v-model="paymentForm.holder" placeholder=""></el-input>
+            </el-form-item>
+            <el-form-item label="Card number" prop="cardno">
+              <el-input v-model="paymentForm.cardno" placeholder=""></el-input>
+            </el-form-item>
+            <el-form-item label="Expiration" prop="expire">
+              <el-date-picker v-model="paymentForm.expire" type="month" placeholder="choose expire time" format="yyyy/MM" value-format="yyyy/MM">
+              </el-date-picker>
+            </el-form-item>
+            <el-form-item label="Security code" prop="cvs">
+              <el-input v-model="paymentForm.cvs" placeholder=""></el-input>
+            </el-form-item>
+            <el-form-item label="ZIP code" prop="postid">
+              <el-input v-model="paymentForm.postid" placeholder=""></el-input>
+            </el-form-item>
+          </el-form>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="paymentMethodDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="confirmPaymentMethodDialog">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
     </div>
+  </div>
 </body>
 <script src="js/jquery.min.js"></script>
+<script src="js/moment.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/axios.min.js"></script>
 <script src="js/element.js"></script>
+<script src="js/en.js"></script>
+
 <script>
+  ELEMENT.locale(ELEMENT.lang.en)
   new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     data: function () {
       return {
-        activeIndex: '4',
+        activeIndex: '3',
         user: {
           userid: 'qky12345@qq.com',
           country: '',
@@ -353,29 +349,44 @@
         groupList: [],
         cityList: [],
         openHouseDateDialogVisible: false,
-        currentBeginDate1: null,
-        currentBeginTime1: null,
-        currentEndDate1: null,
-        currentEndTime1: null,
+        openDateForm: {
+          idx: 1,
+          mls: null,
+          bgndate: null,
+          enddate: null,
+          currentDate: '',
+          currentTime1: '',
+          currentTime2: ''
+        },
         billingTabActiveName: 'billing1',
-        creditCardList: []
+        creditCard: [],
+        paymentMethodDialogVisible: false,
+        paymentForm: {},
+        paymentRules: {
+          holder: [{ required: true, message: 'please enter holder', trigger: 'blur' }],
+          cardno: [{ required: true, message: 'please enter card NO.', trigger: 'blur' }],
+          expire: [{ required: true, message: 'please enter expiration', trigger: 'blur' }],
+          cvs: [{ required: true, message: 'please enter security code', trigger: 'blur' }],
+          postid: [{ required: true, message: 'please enter zip code', trigger: 'blur' }],
+        },
+        orderList: []
       }
     },
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      //this.user = {{ user | safe}}
-      //let imgs = {{ imgs | safe}}
-      //this.creditCardList = {{ cards | safe}}
-      //this.user.userid = 'myccy123@126.com'
-      //this.user.head = {{user.head}}
-      this.user.headImage = this.user.head ? [{url: this.user.head, imgid: 'head'}] : []
-      this.user.qrcodeImage = this.user.qrcode ? [{url: this.user.qrcode, imgid: 'qrcode'}] : []
+      // this.user = {{ user | safe}}
+      // let imgs = {{ imgs | safe}}
+      // this.creditCard = {{ card | safe}}
+      // this.orderList = {{ orders | safe}}
       // this.user.photoImages = imgs.map(function (imageItem) {
       //   return {url: imageItem.img, imgid: imageItem.imgid}
       // })
-      this.user.head2Image = this.user.head2 ? [{url: this.user.head2, imgid: 'head2'}] : []
-      this.user.qrcode2Image = this.user.qrcode2 ? [{url: this.user.qrcode2, imgid: 'head2'}] : []
+      this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
+      this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
+      
+      this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []
+      this.user.qrcode2Image = this.user.qrcode2 ? [{ url: this.user.qrcode2, imgid: 'head2' }] : []
 
       //将user中的数据存入profile
       this.profile.email = this.user.email || ''
@@ -394,7 +405,7 @@
       this.agent.website = this.user.website || null
       this.agent.note = this.user.note || null
       this.agent.selfintro = this.user.selfintro || null
-      
+
       this.uploadData.userid = this.user.userid
       this.fetchCountryList()
       this.fetchProvList()
@@ -445,7 +456,7 @@
           type: 'success'
         })
       },
-      handleAvatar2Success : function (res, file, fileList) {
+      handleAvatar2Success: function (res, file, fileList) {
         file.imgid = 'head2'
         console.log(fileList)
         this.$message({
@@ -479,12 +490,12 @@
       },
       handleImageRemove: function (file, fileList) {
         console.log(file)
-        var self = this
+        let self = this
         if (file.imgid) {
           $.ajax({
             type: 'POST',
             url: 'http://www.realtoraccess.com/web/delimg/',
-            data: {imgid: file.imgid, userid: self.user.userid},
+            data: { imgid: file.imgid, userid: self.user.userid },
             success: function (resp) {
               let respData = JSON.parse(resp)
               let code = respData.rescode
@@ -519,7 +530,7 @@
         this.user.county = ''
       },
       fetchCountryList: function () {
-        var self = this
+        let self = this
         axios.get('http://www.realtoraccess.com/web/get/countries/').then(function (resp) {
           self.countryList = resp.data
         }).catch(function (err) {
@@ -527,7 +538,7 @@
         })
       },
       fetchProvList: function () {
-        var self = this
+        let self = this
         axios.get('http://www.realtoraccess.com/web/get/provs/', { params: { countryid: this.agent.country } }).then(function (resp) {
           self.provList = resp.data
         }).catch(function (err) {
@@ -535,7 +546,7 @@
         })
       },
       fetchGroupList: function () {
-        var self = this
+        let self = this
         axios.get('http://www.realtoraccess.com/web/get/groups/', { params: { provid: this.agent.prov } }).then(function (resp) {
           self.groupList = resp.data
         }).catch(function (err) {
@@ -543,31 +554,111 @@
         })
       },
       fetchCityList: function () {
-        var self = this
+        let self = this
         axios.get('http://www.realtoraccess.com/web/get/cities/', { params: { groupid: this.agent.group } }).then(function (resp) {
           self.cityList = resp.data
         }).catch(function (err) {
           console.log(err)
         })
       },
-      fetchPropertyList: function () {
-        var self = this
-        axios.get('http://www.realtoraccess.com/web/get/singlepages/', { params: { page: ++this.propertyPage, userid: this.user.userid} }).then(function (resp) {
-          self.propertyList = resp.data
+      fetchPropertyList: function (isRefresh) {
+        let self = this
+        axios.get('http://www.realtoraccess.com/web/get/singlepages/', { params: { page: isRefresh ? 1 : ++this.propertyPage, userid: this.user.userid } }).then(function (resp) {
+          isRefresh ? self.propertyList = resp.data : self.propertyList = self.propertyList.concat(resp.data)
           console.log(self.propertyList)
         }).catch(function (err) {
           console.log(err)
         })
       },
-      showOpenHouseDateDialog: function (id, date) {
-        this.currentOpenDate = date
+      formatOpenDate: function (origin) {
+        //origin format is '20180114140000-20180114160000'
+        let length = origin.length
+        if (length === 29) {
+          let originDateString = origin.substring(0, 8)
+          let dateString = moment(originDateString).format('YYYY-MM-DD')
+          let originTime1String = origin.substring(8, 15)
+          let time1 = moment(originTime1String, 'HHmmss').format('HH:mm')
+          let originTime2String = origin.substring(23, 29)
+          let time2 = moment(originTime2String, 'HHmmss').format('HH:mm')
+          return dateString + ' ' + time1 + ' ~ ' + time2
+        } else if (length === 15){
+          if (origin.indexOf("-") === 0) {
+            let originDateString = origin.substring(1, 9)
+            let dateString = moment(originDateString).format('YYYY-MM-DD')
+            let originTime2String = origin.substring(9, 15)
+            let time2 = moment(originTime2String, 'HHmmss').format('HH:mm')
+            return dateString + ' '  + ' ~ ' + time2
+          } else {
+            let originDateString = origin.substring(0, 8)
+            let dateString = moment(originDateString).format('YYYY-MM-DD')
+            let originTime1String = origin.substring(8, 14)
+            let time1 = moment(originTime1String, 'HHmmss').format('HH:mm')
+            return dateString + ' ' + time1 + ' ~ '
+          }
+        } else {
+          return ' ~ ' 
+        }
+      },
+      showOpenHouseDateDialog: function (index, id, origin) {
+        this.openDateForm.idx = index
+        this.openDateForm.mls = id
+        let length = origin.length
+        if (length === 29) {
+          let originDateString = origin.substring(0, 8)
+          let dateString = moment(originDateString).format('YYYYMMDD')
+          let originTime1String = origin.substring(8, 15)
+          let time1 = moment(originTime1String, 'HHmmss').format('HHmmss')
+          let originTime2String = origin.substring(23, 29)
+          let time2 = moment(originTime2String, 'HHmmss').format('HHmmss')
+          this.openDateForm.currentDate = dateString
+          this.openDateForm.currentTime1 = time1
+          this.openDateForm.currentTime2 = time2
+        } else if (length === 15){
+          if (origin.indexOf("-") === 0) {
+            let originDateString = origin.substring(1, 9)
+            let dateString = moment(originDateString).format('YYYYMMDD')
+            let originTime2String = origin.substring(9, 15)
+            let time2 = moment(originTime2String, 'HHmmss').format('HHmmss')
+            this.openDateForm.currentDate = dateString
+            this.openDateForm.currentTime2 = time2
+            this.openDateForm.currentTime1 = ''
+          } else {
+            let originDateString = origin.substring(0, 8)
+            let dateString = moment(originDateString).format('YYYYMMDD')
+            let originTime1String = origin.substring(8, 14)
+            let time1 = moment(originTime1String, 'HHmmss').format('HHmmss')
+            this.openDateForm.currentDate = dateString
+            this.openDateForm.currentTime1 = time1
+            this.openDateForm.currentTime2 = ''
+          }
+        } else {
+          
+        }
         this.openHouseDateDialogVisible = true
-        
+
       },
       confirmOpenHouseDate: function () {
+        let self = this
+        this.$refs.openDate.validate(function (valid) {
+          if (valid) {
+            console.log(self.openDateForm.currentDate)
+            console.log(self.openDateForm.currentTime1)
+            console.log(self.openDateForm.currentTime2)
+            self.updateOpenDate({mls: self.openDateForm.mls, idx: self.openDateForm.idx,
+              bgndate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime1, enddate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime2})
+          }
+        })
+      },
+      confirmPaymentMethodDialog: function () {
+        let self = this
+        this.$refs.payment.validate(function (valid) {
+          if (valid) {
+            self.addCard(self.paymentForm)
+          }
+        })
       },
       submitProfileForm: function () {
-        var self = this
+        let self = this
         this.$refs.profile.validate(function (valid) {
           if (valid) {
             self.updateInfo(self.profile)
@@ -575,7 +666,7 @@
         })
       },
       submitAgentForm: function () {
-        var self = this
+        let self = this
         this.$refs.agent.validate(function (valid) {
           if (valid) {
             self.updateInfo(self.agent)
@@ -583,11 +674,11 @@
         })
       },
       updateInfo: function (data) {
-        var self = this
+        let self = this
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postinfo/',
-          data: Object.assign(data, {userid: this.user.userid}),
+          data: Object.assign(data, { userid: this.user.userid }),
           success: function (resp) {
             let respData = JSON.parse(resp)
             let code = respData.rescode
@@ -597,6 +688,48 @@
                 message: respData.resdesc
               })
             } else {
+              self.$message({
+                type: 'success',
+                message: 'Update Success'
+              })
+            }
+          }
+        })
+      },
+      addCard: function (data) {
+        let self = this
+        $.ajax({
+          type: 'POST',
+          url: 'http://www.realtoraccess.com/web/addcard/',
+          data: Object.assign(data, { userid: this.user.userid }),
+          success: function (resp) {
+            self.paymentMethodDialogVisible = false
+            self.creditCard = Object.assign(self.paymentForm)
+            self.paymentForm = {}
+            self.$message({
+              type: 'success',
+              message: 'Updata Card Success'
+            })
+          }
+        })
+      },
+      updateOpenDate: function (data) {
+        let self = this
+        $.ajax({
+          type: 'POST',
+          url: 'http://www.realtoraccess.com/web/postopendate/',
+          data: Object.assign(data, { userid: this.user.userid }),
+          success: function (resp) {
+            let respData = JSON.parse(resp)
+            let code = respData.rescode
+            if (code !== "0") {
+              self.$message({
+                type: 'error',
+                message: respData.resdesc
+              })
+            } else {
+              self.openHouseDateDialogVisible = false
+              self.fetchPropertyList(true)
               self.$message({
                 type: 'success',
                 message: 'Update Success'

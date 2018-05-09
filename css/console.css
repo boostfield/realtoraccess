@@ -119,6 +119,7 @@ hr {
   margin: 30px 80px;
   width: 160px;
   color: white;
+  border-radius: 2px;
 }
 .el-button.btn-preview {
   background: #32363F;
@@ -178,6 +179,26 @@ hr {
 }
 .el-tabs .el-tabs__active-bar {
   background-color: #00c700;
+}
+.el-dialog .el-button--primary {
+  color: white;
+  background: #00c700;
+  border-color: #00c700;
+}
+.el-dialog .el-button.el-button--text {
+  color: #333;
+}
+.el-time-panel__btn.confirm {
+  color: #00c700;
+}
+.el-date-table td.current:not(.disabled) span {
+  background-color: #00c700;
+}
+.el-date-table td.today span {
+  color: #00c700;
+}
+.el-date-table td.available:hover {
+  color: #00c700;
 }
 #page-dashboard .container {
   border: 1px solid #e5e5e5;
@@ -295,4 +316,20 @@ hr {
 #page-billing .container .credit-card-list .item h3 span {
   color: #333;
   margin-left: 1em;
+}
+#page-billing .container .hint {
+  color: #cbcbcb;
+  font-size: 0.7rem;
+}
+#page-billing .container .invoice-list .item {
+  margin-top: 20px;
+}
+#page-billing .payment-dialog .el-dialog__header {
+  background-image: url('../img/img_payment@2x.png');
+  background-position: right 35px center;
+  background-repeat: no-repeat;
+  background-size: 222px 25px;
+}
+#page-billing .payment-dialog .el-dialog__title {
+  font-weight: bold;
 }
