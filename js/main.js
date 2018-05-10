@@ -35,13 +35,13 @@ $(document).ready(function () {
   $('.backTop').click(function () {
     $('html,body').animate({ scrollTop: 0 }, 'slow')
   })
-  if ($('#selfIntro')[0].scrollHeight > 255) {
+  if ($('#selfIntro').length && $('#selfIntro')[0].scrollHeight > 255) {
     $('#selfIntro > .read-more').show()
   }
-  if ($('#teamIntro')[0].scrollHeight > 255) {
+  if ($('#teamIntro').length && $('#teamIntro')[0].scrollHeight > 255) {
     $('#teamIntro > .read-more').show()
   }
-  if ($('#corpIntro')[0].scrollHeight > 255) {
+  if ($('#corpIntro').length && $('#corpIntro')[0].scrollHeight > 255) {
     $('#corpIntro > .read-more').show()
   }
 })
@@ -68,6 +68,7 @@ function login() {
         $('#error-info').show()
       } else {
         console.log('登录成功')
+        window.location.href = '/web/console/'
       }
     }
 
@@ -90,6 +91,7 @@ function register() {
         $('#error-info').show()
       } else {
         console.log('注册成功')
+        window.location.href = '/web/page/signin/'
       }
     }
   })

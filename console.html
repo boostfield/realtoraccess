@@ -376,13 +376,13 @@
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      // this.user = {{ user | safe}}
-      // let imgs = {{ imgs | safe}}
-      // this.creditCard = {{ card | safe}}
-      // this.orderList = {{ orders | safe}}
-      // this.user.photoImages = imgs.map(function (imageItem) {
-      //   return {url: imageItem.img, imgid: imageItem.imgid}
-      // })
+      this.user = {{ user | safe}}
+      let imgs = {{ imgs | safe}}
+      this.creditCard = {{ card | safe}}
+      this.orderList = {{ orders | safe}}
+      this.user.photoImages = imgs.map(function (imageItem) {
+        return {url: imageItem.img, imgid: imageItem.imgid}
+      })
       this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
@@ -453,7 +453,7 @@
       },
       selectMenu: function (index) {
         if (index == '5') {
-          window.location.href = 'http://www.realtoraccess.com/web/passwd/'
+          window.location.href = '/web/passwd/'
           return
         }
         this.activeIndex = index
