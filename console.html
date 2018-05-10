@@ -227,6 +227,9 @@
                   </h3>
                 </div>
               </div>
+              <el-button class="btn-primary" @click="paymentMethodDialogVisible = true">
+                  Update
+                </el-button>
             </el-tab-pane>
             <el-tab-pane label="Invoice" name="billing2">
               <div class="hint">If you have multiple services, these invoices are a summary of all your charges.</div>
@@ -265,9 +268,7 @@
 
 
         </div>
-        <el-button class="btn-primary" @click="paymentMethodDialogVisible = true">
-          Update
-        </el-button>
+        
         <el-dialog title="Payment Methods" :visible.sync="paymentMethodDialogVisible" width="615px" custom-class="payment-dialog"
           :show-close="false">
           <el-form ref="payment" :model="paymentForm" :rules="paymentRules" label-position="left" label-width="124px">
@@ -405,6 +406,11 @@
       this.agent.website = this.user.website || null
       this.agent.note = this.user.note || null
       this.agent.selfintro = this.user.selfintro || null
+      this.agent.teamintro = this.user.teamintro || null
+      this.agent.corpintro = this.user.corpintro || null
+      this.agent.username2 = this.user.username2 || null
+      this.agent.tel2 = this.user.tel2 || null
+      this.agent.email2 = this.user.email2 || null
 
       this.uploadData.userid = this.user.userid
       this.fetchCountryList()
@@ -446,6 +452,10 @@
         }
       },
       selectMenu: function (index) {
+        if (index == '5') {
+          window.location.href = 'http://www.realtoraccess.com/web/passwd/'
+          return
+        }
         this.activeIndex = index
       },
       handleAvatarSuccess: function (res, file, fileList) {
@@ -641,11 +651,14 @@
         let self = this
         this.$refs.openDate.validate(function (valid) {
           if (valid) {
-            console.log(self.openDateForm.currentDate)
-            console.log(self.openDateForm.currentTime1)
-            console.log(self.openDateForm.currentTime2)
-            self.updateOpenDate({mls: self.openDateForm.mls, idx: self.openDateForm.idx,
-              bgndate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime1, enddate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime2})
+            let data = {mls: self.openDateForm.mls, idx: self.openDateForm.idx}
+            if (self.openDateForm.currentTime1) {
+              data = Object.assign(data, {bgndate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime1})
+            }
+            if (self.openDateForm.currentTime2) {
+              data = Object.assign(data, {enddate: self.openDateForm.currentDate + '' + self.openDateForm.currentTime2})
+            }
+            self.updateOpenDate(data)
           }
         })
       },

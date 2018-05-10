@@ -134,6 +134,8 @@ hr {
   border-color: #32363F;
   margin: 30px 0;
   width: 160px;
+  color: white;
+  border-radius: 2px;
 }
 .el-upload--picture-card {
   background: transparent;
@@ -178,6 +180,13 @@ hr {
   height: 178px;
   display: block;
 }
+img.el-upload-list__item-thumbnail {
+  object-fit: cover;
+}
+.el-tabs__nav-wrap::after {
+  height: 1px;
+  background: @border-color;
+}
 .el-tabs  {
   margin-left: 50px;
   .el-tabs__item.is-active, .el-tabs__item:hover{
@@ -186,6 +195,12 @@ hr {
   .el-tabs__active-bar {
     background-color: @main-color;
   }
+}
+.el-tabs__item {
+  font-size: 0.9rem;
+  color: @text-color;
+  height: 58px;
+  line-height: 58px;
 }
 .el-dialog .el-button--primary {
   color: white;
