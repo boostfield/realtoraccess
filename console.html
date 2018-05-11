@@ -69,7 +69,7 @@
             </el-form-item>
           </el-form>
         </div>
-        <el-button type="primary" class="btn-primary" @click="submitProfileForm">Save</el-button>
+        <el-button type="primary" class="btn-primary" @click="submitProfileForm" :loading="isUpdating">Save</el-button>
       </div>
       <!--经纪人信息-->
       <div id="page-agent" v-show="activeIndex == 2">
@@ -158,7 +158,7 @@
             </el-tabs>
           </el-form>
         </div>
-        <el-button class="btn-primary" @click="submitAgentForm">Save</el-button>
+        <el-button class="btn-primary" @click="submitAgentForm" :loading="isUpdating">Save</el-button>
         <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
 
       </div>
@@ -210,7 +210,7 @@
           </el-form>
             <span slot="footer" class="dialog-footer">
               <el-button @click="openHouseDateDialogVisible = false" type="text" size="small">cancel</el-button>
-              <el-button type="primary" @click="confirmOpenHouseDate" size="small">Done</el-button>
+              <el-button type="primary" @click="confirmOpenHouseDate" size="small" :loading="isUpdating">Done</el-button>
             </span>
           </el-dialog>
         </div>
@@ -296,7 +296,7 @@
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="paymentMethodDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="confirmPaymentMethodDialog">确 定</el-button>
+            <el-button type="primary" @click="confirmPaymentMethodDialog" :loading="isUpdating">确 定</el-button>
           </span>
         </el-dialog>
       </div>
@@ -381,7 +381,8 @@
           cvs: [{ required: true, message: 'please enter security code', trigger: 'blur' }],
           postid: [{ required: true, message: 'please enter zip code', trigger: 'blur' }],
         },
-        orderList: []
+        orderList: [],
+        isUpdating = false
       }
     },
     beforeMount: function () {
@@ -704,6 +705,7 @@
       },
       updateInfo: function (data) {
         let self = this
+        self.isUpdating = true
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postinfo/',
@@ -711,6 +713,7 @@
           success: function (resp) {
             let respData = JSON.parse(resp)
             let code = respData.rescode
+            self.isUpdating = false
             if (code !== "0") {
               self.$message({
                 type: 'error',
@@ -727,11 +730,13 @@
       },
       addCard: function (data) {
         let self = this
+        self.isUpdating = true
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/addcard/',
           data: Object.assign(data, { userid: this.user.userid }),
           success: function (resp) {
+            self.isUpdating = false
             self.paymentMethodDialogVisible = false
             self.creditCard = Object.assign(self.paymentForm)
             self.paymentForm = {}
@@ -744,11 +749,13 @@
       },
       updateOpenDate: function (data) {
         let self = this
+        self.isUpdating = true
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postopendate/',
           data: Object.assign(data, { userid: this.user.userid }),
           success: function (resp) {
+            self.isUpdating = false
             let respData = JSON.parse(resp)
             let code = respData.rescode
             if (code !== "0") {
