@@ -1,3 +1,4 @@
+// out: true
 @import 'mixins.less';
 html {
     font-size: 20px;
@@ -645,11 +646,20 @@ h4 {
         padding-bottom: 20px;
         .logo {
             h2 {
-                display: block;
+                display: inline-block;
             }
         }
         .contact {
             padding-left: 15px;
+            text-align: center;
+            p {
+                display: inline;
+                background-size: 14px;
+                &:after {
+                    content: "\A";
+                    white-space: pre; 
+                }
+            }
         }
     }
     .footer-bottom {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load staticfiles %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,10 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Realtoraccess</title>
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/register.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'web/css/register.css' %}"> -->
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/register.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'web/css/register.css' %}">
 </head>
 
 <body>
@@ -21,9 +21,8 @@
         <div class="row">
           <div class="col-lg-6 col-md-12">
             <img src="{% static 'web/img/img_log_logo@2x.png' %}" width="225" style="margin-top: 50px;" />
-            <h2 class="left-title">Accessible to Chinese
-              <br>market made easy</h2>
-            <button class="btn-contact" title="Contact Us"></button>
+            <h2 class="left-title">Access to the Chinese <br>market made easy!</h2>
+            <!-- <button class="btn-contact" title="Contact Us"></button> -->
           </div>
           <div class="col-lg-6 col-md-12">
             <a href="/"><button class="btn-back">Back</button></a>
@@ -38,7 +37,7 @@
                 <input type="password" class="form-control" id="passwd" placeholder="Password" name="passwd" required>
               </div>
               <label id="error-info" class="error"></label>
-              <button type="submit" class="btn btn-primary">Sign up now</button>
+              <button type="submit" class="btn btn-primary" id="btn-register" data-loading-text="Signing up...">Sign up now</button>
               <div class="hint">
                 <span>Already have an account? </span>
                 <a href="/web/page/signin/"> Log in here</a>
@@ -101,14 +100,14 @@
   </footer>
 
 
-  <script src="js/jquery.min.js"></script>
+  <!-- <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
-  <script src="js/main.js"></script>
-  <!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
+  <script src="js/main.js"></script> -->
+  <script src="{% static 'web/js/jquery.min.js' %}"></script>
   <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
-  <script src="{% static 'web/js/main.js' %}"></script> -->
+  <script src="{% static 'web/js/main.js' %}"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
   <script>

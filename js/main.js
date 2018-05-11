@@ -56,6 +56,9 @@ function login() {
   let userid = $('#userid').val()
   let passwd = $('#passwd').val()
   let data = { userid: userid, passwd: passwd }
+  let $btn = $('#btn-login').button('loading')
+    // business logic...
+    
   $.ajax({
     type: 'POST',
     url: 'http://www.realtoraccess.com/web/signin/',
@@ -64,6 +67,7 @@ function login() {
     success: function (resp) {
       let code = resp.rescode
       if (code != "0") {
+        $btn.button('reset')
         $('#error-info').text(resp.resdesc)
         $('#error-info').show()
       } else {
@@ -79,6 +83,7 @@ function register() {
   let userid = $('#userid').val()
   let passwd = $('#passwd').val()
   let data = { userid: userid, passwd1: passwd, passwd2: passwd }
+  let $btn = $('#btn-register').button('loading')
   $.ajax({
     type: 'POST',
     url: 'http://www.realtoraccess.com/web/signup/',
@@ -87,6 +92,7 @@ function register() {
     success: function (resp) {
       let code = resp.rescode
       if (code != 0) {
+        $btn.button('reset')
         $('#error-info').text(resp.resdesc)
         $('#error-info').show()
       } else {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load staticfiles %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,9 +21,8 @@
           <div class="row">
             <div class="col-lg-6 col-md-12">
               <img src="{% static 'web/img/img_log_logo@2x.png' %}" width="225" style="margin-top: 50px;" />
-              <h2 class="left-title">Accessible to Chinese 
-                <br>market made easy</h2>
-              <button class="btn-contact" title="Contact Us"></button>
+              <h2 class="left-title">Access to the Chinese <br>market made easy!</h2>
+              <!-- <button class="btn-contact" title="Contact Us"></button> -->
             </div>
             <div class="col-lg-6 col-md-12">
               <a href="http://www.realtoraccess.com"><button class="btn-back">Back</button></a>
@@ -38,7 +37,7 @@
                 </div>
                 <label id="error-info" class="error"></label>
                 <a href="#" class="forget-password">Forget Your Password?</a>
-                <button type="submit" class="btn btn-primary">Log in</button>
+                <button type="submit" class="btn btn-primary" id="btn-login" data-loading-text="Logining...">Log in</button>
                 <div class="hint">
                   <span>Dont't have an account? </span>
                   <a href="/web/page/signup"> Sign up</a>
