@@ -175,13 +175,13 @@
                   <td width="100" class="name">Property ID</td>
                   <td width="154" class="content">[[property.mls]]</td>
                   <td width="111" class="name">Listing URL</td>
-                  <td width="555" class="content">[[property.url]]</td>
+                  <td width="555" class="content"><a :href="property.url"></a>[[property.url]]</td>
                 </tr>
                 <tr>
                   <td class="name">Listing views</td>
                   <td class="content">[[property.visit]]</td>
                   <td class="name">Viewer Report</td>
-                  <td class="content">[[property.consoleurl]]</td>
+                  <td class="content"><a :href="property.consoleurl">[[property.consoleurl]]</a></td>
                 </tr>
                 <tr>
                   <td class="name">Date</td>
@@ -382,21 +382,20 @@
           postid: [{ required: true, message: 'please enter zip code', trigger: 'blur' }],
         },
         orderList: [],
-        isUpdating = false
+        isUpdating: false
       }
     },
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      // this.user = {{ user | safe}}
-      // let imgs = {{ imgs | safe}}
-      // this.creditCard = {{ card | safe}}
-      // this.orderList = {{ orders | safe}}
-      // this.user.photoImages = imgs.map(function (imageItem) {
-      //   return {url: imageItem.img, imgid: imageItem.imgid}
-      // })
-      //this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
-      this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
+      this.user = {{ user | safe}}
+      let imgs = {{ imgs | safe}}
+      this.creditCard = {{ card | safe}}
+      this.orderList = {{ orders | safe}}
+      this.user.photoImages = imgs.map(function (imageItem) {
+        return {url: imageItem.img, imgid: imageItem.imgid}
+      })
+      this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
       this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []

@@ -222,7 +222,6 @@ h4 {
   font-weight: 400;
   max-height: 255px;
   overflow: hidden;
-  text-indent: 2em;
 }
 h4 .read-more {
   position: absolute;
@@ -254,6 +253,9 @@ h4 .read-more {
   background: #00C700;
   bottom: 0;
   left: 0;
+}
+.personal-info h4 {
+  text-indent: 2em;
 }
 .personal-info #carousel-agent {
   width: 420px;
@@ -561,6 +563,7 @@ h4 .read-more {
   }
   .top .title-info .logo h2 {
     font-size: 1.5rem;
+    text-align: center;
   }
   .basic-info {
     padding-top: 20px;
@@ -615,6 +618,9 @@ h4 .read-more {
   .sources-list {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: left;
+  }
+  .sources-list h2 {
     text-align: center;
   }
   .sources-list .item {
@@ -627,6 +633,9 @@ h4 .read-more {
   .related-readings {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: left;
+  }
+  .related-readings h2 {
     text-align: center;
   }
   .related-readings .item {
@@ -642,6 +651,10 @@ h4 .read-more {
   .footer-top {
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+  .footer-top .logo img {
+    display: block;
+    margin: 1em auto;
   }
   .footer-top .logo h2 {
     display: inline-block;
