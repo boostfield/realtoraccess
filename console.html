@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load staticfiles %}
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Realtoraccess</title>
-  <link rel="stylesheet" href="css/element.css">
-  <link rel="stylesheet" href="css/console.css">
+  <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
+  <link rel="stylesheet" href="{% static 'web/css/console.css' %}">
+  <!-- <link rel="stylesheet" href="css/element.css">
+  <link rel="stylesheet" href="css/console.css"> -->
 </head>
 
 <body>
@@ -15,7 +17,7 @@
       <el-menu mode="vertical" class="vertical-nav" :router="false" :unique-opened="true" :default-active="activeIndex" @select="selectMenu"
         background-color="#32363f" text-color="#747e92" active-text-color="#fff">
         <div>
-          <img class="nav-logo" src="img/img_nav_logo_console@2x.png" width="147" />
+          <img class="nav-logo" src="{% static 'web/img/img_nav_logo_console@2x.png" width="147" />
           <el-menu-item index="1" class="menu-dashboard">
             <span slot="title">DASHBOARD</span>
           </el-menu-item>
@@ -60,8 +62,8 @@
               <el-input v-model="profile.postid"></el-input>
             </el-form-item>
             <el-form-item label="Avatar (1:1)">
-              <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
-                :on-success="handleAvatarSuccess" :on-remove="handleImageRemove" :data="uploadData" name="head" :file-list="user.headImage">
+              <el-upload ref="uploadAvatar" class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
+                :on-success="handleAvatarSuccess" :on-remove="handleImageRemove" :data="uploadData" name="head" :file-list="user.headImage" :on-change="handleAvatarChange">
                 <el-button type="primary" size="medium">Upload</el-button>
               </el-upload>
             </el-form-item>
@@ -103,7 +105,7 @@
                   <el-input v-model="agent.website" placeholder=""></el-input>
                 </el-form-item>
                 <el-form-item label="QRCode">
-                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
+                  <el-upload ref="uploadQRCode" class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
                     :on-success="handleQRCodeSuccess" :on-remove="handleImageRemove" :data="uploadData" name="qrcode" :file-list="user.qrcodeImage">
                     <el-button type="primary" size="medium">Upload</el-button>
                   </el-upload>
@@ -132,7 +134,7 @@
               </el-tab-pane>
               <el-tab-pane label="My Co-agent" name="agent3">
                 <el-form-item label="Avatar (1:1)">
-                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
+                  <el-upload ref="uploadAvatar2" class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
                     :on-success="handleAvatar2Success" :on-remove="handleImageRemove" :data="uploadData" name="head2" :file-list="user.head2Image">
                     <el-button type="primary" size="medium">Upload</el-button>
                   </el-upload>
@@ -147,7 +149,7 @@
                   <el-input v-model="agent.email2"></el-input>
                 </el-form-item>
                 <el-form-item label="QRCode">
-                  <el-upload class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
+                  <el-upload ref="uploadQRCode2" class="avatar-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" multiple="false"
                     :on-success="handleQRCode2Success" :on-remove="handleImageRemove" :data="uploadData" name="qrcode2" :file-list="user.qrcode2Image">
                     <el-button type="primary" size="medium">Upload</el-button>
                   </el-upload>
@@ -157,7 +159,7 @@
           </el-form>
         </div>
         <el-button class="btn-primary" @click="submitAgentForm">Save</el-button>
-        <el-button class="btn-preview">Preview</el-button>
+        <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
 
       </div>
       <!--房源信息-->
@@ -219,7 +221,7 @@
         <div class="container">
           <el-tabs v-model="billingTabActiveName">
             <el-tab-pane label="Payment Method" name="billing1">
-              <div class="credit-card-list">
+              <div class="credit-card-list" v-if="creditCard && creditCard.cardno">
                 <div class="item">
                   <h2>[[creditCard.cardno]]</h2>
                   <h3>Name<span>[[creditCard.holder]]</span></h3>
@@ -227,12 +229,15 @@
                   </h3>
                 </div>
               </div>
+              <div v-else class="hint">
+                Click Update to Complete Your Credit Card Info
+              </div>
               <el-button class="btn-primary" @click="paymentMethodDialogVisible = true">
                   Update
                 </el-button>
             </el-tab-pane>
             <el-tab-pane label="Invoice" name="billing2">
-              <div class="hint">If you have multiple services, these invoices are a summary of all your charges.</div>
+              <div class="hint" v-if="orderList && orderList.length">If you have multiple services, these invoices are a summary of all your charges.</div>
               <div class="invoice-list">
                 <div class="item" v-for="order in orderList">
                   <div class="card-number">[[order.cardno]]</div>
@@ -298,12 +303,18 @@
     </div>
   </div>
 </body>
-<script src="js/jquery.min.js"></script>
+<!-- <script src="js/jquery.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/axios.min.js"></script>
 <script src="js/element.js"></script>
-<script src="js/en.js"></script>
+<script src="js/en.js"></script> -->
+<script src="{% static 'web/js/jquery.min.js' %}"></script>
+<script src="{% static 'web/js/moment.min.js' %}"></script>
+<script src="{% static 'web/js/vue.min.js' %}"></script>
+<script src="{% static 'web/js/axios.min.js' %}"></script>
+<script src="{% static 'web/js/element.js' %}"></script>
+<script src="{% static 'web/js/en.js' %}"></script>
 
 <script>
   ELEMENT.locale(ELEMENT.lang.en)
@@ -376,14 +387,15 @@
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      this.user = {{ user | safe}}
-      let imgs = {{ imgs | safe}}
-      this.creditCard = {{ card | safe}}
-      this.orderList = {{ orders | safe}}
-      this.user.photoImages = imgs.map(function (imageItem) {
-        return {url: imageItem.img, imgid: imageItem.imgid}
-      })
-      this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
+      // this.user = {{ user | safe}}
+      // let imgs = {{ imgs | safe}}
+      // this.creditCard = {{ card | safe}}
+      // this.orderList = {{ orders | safe}}
+      // this.user.photoImages = imgs.map(function (imageItem) {
+      //   return {url: imageItem.img, imgid: imageItem.imgid}
+      // })
+      //this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
+      this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
       this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []
@@ -460,15 +472,18 @@
       },
       handleAvatarSuccess: function (res, file, fileList) {
         file.imgid = 'head'
-        console.log(fileList)
+        this.$refs.uploadAvatar.fileList = [file]
         this.$message({
           message: 'upload avatar success',
           type: 'success'
         })
       },
+      handleAvatarChange: function () {
+        //this.$refs.uploadAvatar.clearFiles()
+      },
       handleAvatar2Success: function (res, file, fileList) {
         file.imgid = 'head2'
-        console.log(fileList)
+        this.$refs.uploadAvatar2.fileList = [file]
         this.$message({
           message: 'upload avatar success',
           type: 'success'
@@ -476,7 +491,7 @@
       },
       handleQRCodeSuccess: function (res, file, fileList) {
         file.imgid = 'qrcode'
-        console.log(fileList)
+        this.$refs.uploadQRCode.fileList = [file]
         this.$message({
           message: 'upload qrcode success',
           type: 'success'
@@ -484,7 +499,7 @@
       },
       handleQRCode2Success: function (res, file, fileList) {
         file.imgid = 'qrcode2'
-        console.log(fileList)
+        this.$refs.uploadQRCode2.fileList = [file]
         this.$message({
           message: 'upload qrcode success',
           type: 'success'
@@ -492,14 +507,12 @@
       },
       handlePhotoSuccess: function (res, file, fileList) {
         file.imgid = res
-        console.log(fileList)
         this.$message({
           message: 'upload photo success',
           type: 'success'
         })
       },
       handleImageRemove: function (file, fileList) {
-        console.log(file)
         let self = this
         if (file.imgid) {
           $.ajax({
@@ -685,6 +698,9 @@
             self.updateInfo(self.agent)
           }
         })
+      },
+      preViewMypage: function () {
+        window.open("/web/agent2/"+this.user.id)
       },
       updateInfo: function (data) {
         let self = this
