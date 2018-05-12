@@ -44,6 +44,13 @@ $(document).ready(function () {
   if ($('#corpIntro').length && $('#corpIntro')[0].scrollHeight > 255) {
     $('#corpIntro > .read-more').show()
   }
+  $(document).click(function (event) {
+    var clickover = $(event.target)
+    var _opened = $('.navbar-collapse').hasClass('in')
+    if (_opened === true) {
+        $('button.navbar-toggle').click()
+    }
+});
 })
 $(document).mouseup(function (e) {
   var container = $(".popover")
@@ -97,7 +104,7 @@ function register() {
         $('#error-info').show()
       } else {
         console.log('注册成功')
-        window.location.href = '/web/page/signin/'
+        window.location.href = '/web/console/'
       }
     }
   })

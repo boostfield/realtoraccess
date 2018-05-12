@@ -169,6 +169,9 @@ img {
                 p {
                     color: @text-second-color;
                     margin-bottom: 4px;
+                    a {
+                        color: @text-second-color;
+                    }
                 }
                 img {
                     vertical-align: top;
@@ -200,6 +203,7 @@ img {
         &.qrcode {
             img {
                 width: 85px;
+                height: 85px;
             }
         }
         h3 {
@@ -208,6 +212,10 @@ img {
         h4 {
             font-size: 0.8rem;
             font-weight: 400;
+            a {
+                color: @text-color;
+                text-decoration: none;
+            }
         }
     }
 }
@@ -551,6 +559,9 @@ h4 {
         height: 60px;
         .navbar-nav > li {
             margin: 0;
+            a {
+                padding-left: 10px;
+            }
         }
         .navbar-text.location {
             line-height: 60px;
@@ -562,6 +573,7 @@ h4 {
         }
         .not-login {
             line-height: 60px;
+            padding-left: 10px;
         }
     }
     .navbar-fixed-top .navbar-collapse {
@@ -602,7 +614,7 @@ h4 {
         }
         h4 {
             max-height: initial;
-            text-align: center;
+            text-align: left;
             .read-more {
                 display: none;
             }
@@ -671,6 +683,9 @@ h4 {
                     content: "\A";
                     white-space: pre; 
                 }
+            }
+            img {
+                margin-top: 2em;
             }
         }
     }

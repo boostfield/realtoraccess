@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Realtoraccess</title>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}"> -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/agent.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agent.css" rel="stylesheet"> -->
 
 </head>
 
@@ -92,8 +92,8 @@
                             <img class='avatar' src='{{user.head2.url}}' width='77'/>
                             <div class='info'>
                                     <h2>{{user.username2}}</h2>
-                                    <p>电话: {{user.tel2}}</p>
-                                    <p>邮箱: {{user.email2}}</p>
+                                    <p>电话: <a href='tel:{{user.tel2}}'>{{user.tel2}}</a></p>
+                                    <p>邮箱: <a href='mailto:{{user.email2}}'>{{user.email2}}</a></p>
                                     <p>微信: <img src='{{user.qrcode2.url}}' width='62'/></p>
                             </div>
                             <form id='formMessage'>
@@ -123,7 +123,7 @@
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_phone@2x.png'%}" alt="电话" />
                 <h3>电话</h3>
-                <h4>{{user.tel}}</h4>
+                <h4><a href="tel:{{user.tel}}">{{user.tel}}</a></h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_address@2x.png'%}" alt="地址" />
@@ -133,12 +133,12 @@
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_website@2x.png'%}" alt="网址" />
                 <h3>网址</h3>
-                <h4>{{user.website}}</h4>
+                <h4><a href="{{user.website}}">{{user.website}}</a></h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_email@2x.png'%}" alt="邮箱" />
                 <h3>邮箱</h3>
-                <h4>{{user.email}}</h4>
+                <h4><a href="mailto:{{user.email}}">{{user.email}}</a></h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_code@2x.png'%}" alt="邮编" />
@@ -159,7 +159,7 @@
                     <div class="text-part">
                         <h2>个人介绍</h2>
                         <h4 id="selfIntro">{{user.selfintro}}
-                            <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                            <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
                                 title="" data-content="<div>{{user.selfintro}}
                                 </div>">[查看更多]</div>
                         </h4>
@@ -213,7 +213,7 @@
                     <div class="text-part">
                         <h2>团队介绍</h2>
                         <h4 id="teamIntro">{{user.teamintro}}
-                                <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
                                     title="" data-content="<div>{{user.teamintro}}
                                     </div>">[查看更多]</div>
                             </h4>
@@ -238,7 +238,7 @@
                     <div class="text-part">
                         <h2>公司介绍</h2>
                         <h4 id="corpIntro">{{user.corpintro}}
-                                <div class="read-more" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
                                     title="" data-content="<div>{{user.corpintro}}
                                     </div>">[查看更多]</div>
                             </h4>
@@ -310,16 +310,16 @@
         <div class="btn-option wechat"><img src="{% static 'web/img/img_right_02@2x.png' %}"/></div>
         <div class="btn-option"><a href="http://ruianju.kuaizhan.com/clubv2/forums/WNPMtTEF8TSeToY_" target="_blank"><img src="{% static 'web/img/img_right_03@2x.png' %}" /></a></div>
         <div class="btn-option"><a href="http://www.huilvwang.com/" target="_blank"><img src="{% static 'web/img/img_right_04@2x.png' %}" /></a></div>
-        <div class="btn-option backTop"><img src="{% static 'web/img/img_right_top@2x.png' %}"" /></div>
+        <div class="btn-option backTop"><img src="{% static 'web/img/img_right_top@2x.png' %}" /></div>
         
     </div>
-    <div id="wechat-qrcode"><img src="{% static 'web/img/kefu.png' %}""/></div>
+    <div id="wechat-qrcode"><img src="{% static 'web/img/kefu.png' %}"/></div>
     <footer>
         <div class="container footer-top">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="logo">
-                        <img src="{% static 'web/img/img_bottom_logo@2x.png' %}""/>
+                        <img src="{% static 'web/img/img_bottom_logo@2x.png' %}"/>
                         <h2>首创全球无忧置业信息服务平台</h2>
                         <h4 class="hidden-xs">海外瑞安居（简称“瑞安居”），<a href="http://www.realtoraccess.com/">www.瑞安居.com</a>，面向全球华人提供最新、最全海外房产置业投资信息，汇集了美国、澳大利亚、加拿大、英国主要城市MLS二手房源、海外置业中介房源，
                             海外房产经纪暗盘，期房楼花新盘以及海外短租房源。让全球华人可以查询海外主要城市房价、实时跟踪海外房源价格走势。集成视频、3D、户型图以及房源照片等房源详情信息，通过<a href="http://www.realtoraccess.com/web/houselist/">海外房源网页</a>全面进行展示，
@@ -335,7 +335,7 @@
                     <p class="phone">客服专线 | <a href="tel:4008771896">400 877 1896</a></p>
                     <p class="time">营业时间 | 周一至周日 9:00~17:00</p>
                     <p class="email">客服邮箱 | <a href="mailto:clientservice@realtoraccess.com">clientservice@realtoraccess.com</a></p>
-                    <img src="{% static 'web/img/img_wechat@2x.png' %}"" />
+                    <img src="{% static 'web/img/img_wechat@2x.png' %}" />
                 </div>
             </div>
         </div>
@@ -344,7 +344,7 @@
                 <p>
                     <a href="">海外房源</a>
                     <a href="">经纪门户</a>
-                    <a href="">及时沟通</a>
+                    <a href="">即时沟通</a>
                     <a href="">全程服务</a>
                     <a href="">隐私条款</a>
                     <a href="">使用条款</a>
@@ -357,14 +357,14 @@
     </footer>
 
 
-    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="js/main.js"></script>
-    <!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="js/main.js"></script> -->
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
-    <script src="{% static 'web/js/main.js' %}"></script> -->
+    <script src="{% static 'web/js/main.js' %}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
     <script>

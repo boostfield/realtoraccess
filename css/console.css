@@ -46,6 +46,7 @@ hr {
 }
 .vertical-nav {
   width: 180px;
+  height: 100%;
   border-right: none;
 }
 .vertical-nav .nav-logo {
@@ -78,6 +79,12 @@ hr {
 }
 .vertical-nav .el-menu-item.menu-password {
   background-image: url('../img/img_password_n@2x.png');
+}
+.vertical-nav .el-menu-item.menu-logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .vertical-nav .el-menu-item.is-active {
   background-color: #4A505D !important;

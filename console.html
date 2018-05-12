@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Realtoraccess</title>
+  <title>Create your Realtor Webpage in Chinese - Realtoraccess</title>
+  <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
   <link rel="stylesheet" href="{% static 'web/css/console.css' %}">
   <!-- <link rel="stylesheet" href="css/element.css">
@@ -17,7 +18,7 @@
       <el-menu mode="vertical" class="vertical-nav" :router="false" :unique-opened="true" :default-active="activeIndex" @select="selectMenu"
         background-color="#32363f" text-color="#747e92" active-text-color="#fff">
         <div>
-          <img class="nav-logo" src="{% static 'web/img/img_nav_logo_console@2x.png" width="147" />
+          <img class="nav-logo" src="{% static 'web/img/img_nav_logo_console@2x.png' %}" width="147"  @click="enterHome"/>
           <el-menu-item index="1" class="menu-dashboard">
             <span slot="title">DASHBOARD</span>
           </el-menu-item>
@@ -32,6 +33,9 @@
           </el-menu-item>
           <el-menu-item index="5" class="menu-password">
             <span slot="title">PASSWORD</span>
+          </el-menu-item>
+          <el-menu-item index="6" class="menu-logout">
+            <span slot="title">LOGOUT</span>
           </el-menu-item>
         </div>
       </el-menu>
@@ -114,7 +118,7 @@
                   <el-input v-model="agent.note" placeholder=""></el-input>
                 </el-form-item>
                 <el-form-item label="About Me">
-                  <el-input v-model="agent.selfintro" placeholder=""></el-input>
+                  <el-input type="textarea" v-model="agent.selfintro" :rows="4"></el-input>
                 </el-form-item>
                 <el-form-item label="Photo (1:1)">
                   <el-upload class="photo-uploader" action="http://www.realtoraccess.com/web/postimg/" list-type="picture-card" :multiple="false"
@@ -188,7 +192,7 @@
                   <td class="content">[[property.date]]</td>
                   <td class="name">Open house</td>
                   <td class="content">[[formatOpenDate(property.opendate1)]]
-                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)">update</el-button>
+                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 2em;">update</el-button>
                     [[formatOpenDate(property.opendate2)]]
                     <el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button>
                   </td>
@@ -209,7 +213,7 @@
               </el-row>
           </el-form>
             <span slot="footer" class="dialog-footer">
-              <el-button @click="openHouseDateDialogVisible = false" type="text" size="small">cancel</el-button>
+              <el-button @click="openHouseDateDialogVisible = false" type="text" size="small">Cancel</el-button>
               <el-button type="primary" @click="confirmOpenHouseDate" size="small" :loading="isUpdating">Done</el-button>
             </span>
           </el-dialog>
@@ -223,7 +227,7 @@
             <el-tab-pane label="Payment Method" name="billing1">
               <div class="credit-card-list" v-if="creditCard && creditCard.cardno">
                 <div class="item">
-                  <h2>[[creditCard.cardno]]</h2>
+                  <h2>[[formateCreditCard(creditCard.cardno)]]</h2>
                   <h3>Name<span>[[creditCard.holder]]</span></h3>
                   <h3>Expiration<span>[[creditCard.expire]]</span>
                   </h3>
@@ -240,7 +244,7 @@
               <div class="hint" v-if="orderList && orderList.length">If you have multiple services, these invoices are a summary of all your charges.</div>
               <div class="invoice-list">
                 <div class="item" v-for="order in orderList">
-                  <div class="card-number">[[order.cardno]]</div>
+                  <div class="card-number">[[formateCreditCard(order.cardno)]]</div>
                   <el-table
                     :data="order.records"
                     style="width: 100%">
@@ -281,22 +285,22 @@
               <el-input v-model="paymentForm.holder" placeholder=""></el-input>
             </el-form-item>
             <el-form-item label="Card number" prop="cardno">
-              <el-input v-model="paymentForm.cardno" placeholder=""></el-input>
+              <el-input v-model="paymentForm.cardno" placeholder="" type="number"></el-input>
             </el-form-item>
             <el-form-item label="Expiration" prop="expire">
               <el-date-picker v-model="paymentForm.expire" type="month" placeholder="choose expire time" format="yyyy/MM" value-format="yyyy/MM">
               </el-date-picker>
             </el-form-item>
             <el-form-item label="Security code" prop="cvs">
-              <el-input v-model="paymentForm.cvs" placeholder=""></el-input>
+              <el-input v-model="paymentForm.cvs" placeholder="" type="number"></el-input>
             </el-form-item>
             <el-form-item label="ZIP code" prop="postid">
               <el-input v-model="paymentForm.postid" placeholder=""></el-input>
             </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="paymentMethodDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="confirmPaymentMethodDialog" :loading="isUpdating">确 定</el-button>
+            <el-button @click="paymentMethodDialogVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="confirmPaymentMethodDialog" :loading="isUpdating">Update</el-button>
           </span>
         </el-dialog>
       </div>
@@ -323,7 +327,7 @@
     delimiters: ['[[', ']]'],
     data: function () {
       return {
-        activeIndex: '3',
+        activeIndex: '1',
         user: {
           userid: 'qky12345@qq.com',
           country: '',
@@ -371,15 +375,17 @@
           currentTime2: ''
         },
         billingTabActiveName: 'billing1',
-        creditCard: [],
+        creditCard: {},
         paymentMethodDialogVisible: false,
         paymentForm: {},
         paymentRules: {
-          holder: [{ required: true, message: 'please enter holder', trigger: 'blur' }],
-          cardno: [{ required: true, message: 'please enter card NO.', trigger: 'blur' }],
-          expire: [{ required: true, message: 'please enter expiration', trigger: 'blur' }],
-          cvs: [{ required: true, message: 'please enter security code', trigger: 'blur' }],
-          postid: [{ required: true, message: 'please enter zip code', trigger: 'blur' }],
+          holder: [{ required: true, message: 'Please enter name on card', trigger: 'blur' }],
+          cardno: [{ required: true, message: 'Please enter card number', trigger: 'blur' },
+          { min: 16, max: 16, message: 'Please enter correct card number', trigger: 'blur' }],
+          expire: [{ required: true, message: 'Please enter expiration', trigger: 'blur' }],
+          cvs: [{ required: true, message: 'Please enter security code', trigger: 'blur' },
+          { min: 3, max: 3, message: 'Please enter correct security code', trigger: 'blur' }],
+          postid: [{ required: true, message: 'Please enter Zip Code', trigger: 'blur' }],
         },
         orderList: [],
         isUpdating: false
@@ -395,7 +401,8 @@
       this.user.photoImages = imgs.map(function (imageItem) {
         return {url: imageItem.img, imgid: imageItem.imgid}
       })
-      this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
+      // this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
+      //this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
       this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []
@@ -464,8 +471,14 @@
         }
       },
       selectMenu: function (index) {
+        //change password
         if (index == '5') {
           window.location.href = '/web/passwd/'
+          return
+        }
+        //back to home
+        if (index == '6') {
+          window.location.href = '/web/page/signin/'
           return
         }
         this.activeIndex = index
@@ -588,7 +601,6 @@
         let self = this
         axios.get('http://www.realtoraccess.com/web/get/singlepages/', { params: { page: isRefresh ? 1 : ++this.propertyPage, userid: this.user.userid } }).then(function (resp) {
           isRefresh ? self.propertyList = resp.data : self.propertyList = self.propertyList.concat(resp.data)
-          console.log(self.propertyList)
         }).catch(function (err) {
           console.log(err)
         })
@@ -708,7 +720,7 @@
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postinfo/',
-          data: Object.assign(data, { userid: this.user.userid }),
+          data: Object.assign({ userid: this.user.userid }, data),
           success: function (resp) {
             let respData = JSON.parse(resp)
             let code = respData.rescode
@@ -733,7 +745,7 @@
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/addcard/',
-          data: Object.assign(data, { userid: this.user.userid }),
+          data: Object.assign({ userid: this.user.userid }, data),
           success: function (resp) {
             self.isUpdating = false
             self.paymentMethodDialogVisible = false
@@ -752,7 +764,7 @@
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postopendate/',
-          data: Object.assign(data, { userid: this.user.userid }),
+          data: Object.assign({ userid: this.user.userid }, data),
           success: function (resp) {
             self.isUpdating = false
             let respData = JSON.parse(resp)
@@ -772,6 +784,15 @@
             }
           }
         })
+      },
+      formateCreditCard: function (cardno) {
+        if (cardno && cardno.length == 16) {
+          return '************' + cardno.substring(12, 16)
+        }
+        return ''
+      },
+      enterHome: function () {
+        window.location.href = '/'
       }
     }
   })
