@@ -301,6 +301,10 @@ img.el-upload-list__item-thumbnail {
   white-space: nowrap;
   height: 44px;
 }
+#page-properties .container table .content a {
+  color: #333;
+  text-decoration: none;
+}
 #page-properties .container table .el-button {
   color: #00c700;
   border-color: #00c700;

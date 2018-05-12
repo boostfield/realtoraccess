@@ -1,3 +1,4 @@
+// out: true
 @main-color: #00c700;
 @text-color: #333;
 @second-text-color: #666;
@@ -312,6 +313,10 @@ img.el-upload-list__item-thumbnail {
         text-overflow: ellipsis;
         white-space: nowrap;
         height: 44px;
+        a {
+          color: @text-color;
+          text-decoration: none;
+        }
       }
       .el-button {
         color: @main-color;
