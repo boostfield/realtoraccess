@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img alt="Brand" src="{% static 'web/img/img_nav_logo@2x.png' %}" />
                     </a>
                     <span class="navbar-text location">加拿大-大温地区</span>
@@ -39,23 +39,23 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">首页</a>
+                        <a href="http://www.realtoraccess.com/">首页</a>
                     </li>
                     <li>
-                        <a href="#">海外房源</a>
+                        <a href="http://www.realtoraccess.com/web/houses/">海外房源</a>
                     </li>
                     <li class="active">
-                        <a href="#">经纪门户</a>
+                        <a href="http://www.realtoraccess.com/web/agentlist/">经纪门户</a>
                     </li>
                     <li>
-                        <a href="#">即时沟通</a>
+                        <a href="http://www.realtoraccess.com/web/app/" rel="nofollow">即时沟通</a>
                     </li>
                     <li>
-                        <a href="#">全球资讯</a>
+                        <a href="http://www.realtoraccess.com/news/list/">全球资讯</a>
                     </li>
-                    <a class="not-login" href="/web/page/signin/">Agent? Log in</a>
+                    <a class="not-login" href="/web/page/signin/" rel="nofollow">Agent? Log in</a>
                     <a class="not-login"> | </a>
-                    <a class="not-login" href="/web/page/signup/">Sign up</a>
+                    <a class="not-login" href="/web/page/signup/" rel="nofollow">Sign up</a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -133,7 +133,7 @@
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_website@2x.png'%}" alt="网址" />
                 <h3>网址</h3>
-                <h4><a href="{{user.website}}">{{user.website}}</a></h4>
+                <h4><a href="{{user.website}}" rel="nofollow">{{user.website}}</a></h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_email@2x.png'%}" alt="邮箱" />
@@ -281,12 +281,12 @@
             <div class="row">
                 {% for item in atc %}
                     <div class="col-lg-6 item">
-                        <a href="{{item.url}}"><div class="col-lg-4"><img src="{{item.img}}"/></div>
+                        <div class="col-lg-4"><a href="{{item.url}}"><img src="{{item.img}}" alt="{{item.title}}"/></div></a>
                         <div class="col-lg-8">
-                            <h3>{{item.title}}</h3>
+                            <a href="{{item.url}}"><h3>{{item.title}}</h3></a>
                             <h4>{{item.intro}}</h4>
-                            <div class="read-more">查看详情>></div>
-                        </div></a>
+                            <a href="{{item.url}}"><div class="read-more">查看详情>></div></a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -342,14 +342,14 @@
         <div class="footer-bottom">
             <div class="container text-center">
                 <p>
-                    <a href="">海外房源</a>
-                    <a href="">经纪门户</a>
-                    <a href="">即时沟通</a>
-                    <a href="">全程服务</a>
-                    <a href="">隐私条款</a>
-                    <a href="">使用条款</a>
-                    <a href="">关于我们</a>
-                    <a href="">城市合伙人</a>
+                    <a href="http://www.realtoraccess.com/web/houses/">海外房源</a>
+                    <a href="http://www.realtoraccess.com/web/agentlist/">经纪门户</a>
+                    <a href="http://www.realtoraccess.com/web/app/" rel="nofollow">即时沟通</a>
+                    <a href="/" rel="nofollow">全程服务</a>
+                    <a href="/" rel="nofollow">隐私条款</a>
+                    <a href="/" rel="nofollow">使用条款</a>
+                    <a href="/" rel="nofollow">关于我们</a>
+                    <a href="/" rel="nofollow">城市合伙人</a>
                 </p>
                 <p>©海外瑞安居（北京）科技发展有限公司 版权所有|京ICP备17003593号</p>
             </div>

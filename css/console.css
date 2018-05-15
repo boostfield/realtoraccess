@@ -277,7 +277,7 @@ img.el-upload-list__item-thumbnail {
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.03);
-  width: 1126px;
+  width: 1166px;
 }
 #page-properties .container h2 {
   margin-left: 50px;
@@ -295,6 +295,8 @@ img.el-upload-list__item-thumbnail {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 20px;
   padding-bottom: 10px;
+  table-layout: fixed;
+  width: 1110px;
 }
 #page-properties .container table .name {
   font-size: 0.7rem;
@@ -315,6 +317,10 @@ img.el-upload-list__item-thumbnail {
 #page-properties .container table .el-button {
   color: #00c700;
   border-color: #00c700;
+}
+#page-properties .container table td {
+  overflow: hidden;
+  white-space: nowrap;
 }
 #page-properties .container .property-list .item:last-child table {
   border-bottom: none;

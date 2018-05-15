@@ -260,7 +260,6 @@ img.el-upload-list__item-thumbnail {
     border: 1px solid @border-color;
     border-radius: 4px;
     box-shadow:1px 0px 6px rgba(0,0,0,0.03);
-    
     .el-select>.el-input {
       width: 112px;
       margin-right: 10px;
@@ -292,7 +291,7 @@ img.el-upload-list__item-thumbnail {
     border: 1px solid @border-color;
     border-radius: 4px;
     box-shadow:1px 0px 6px rgba(0,0,0,0.03);
-    width: 1126px;
+    width: 1166px;
     h2 {
       margin-left: 50px;
       font-size: 1rem;
@@ -309,6 +308,8 @@ img.el-upload-list__item-thumbnail {
       border-bottom: 1px solid @border-color;
       margin-bottom: 20px;
       padding-bottom: 10px;
+      table-layout: fixed;
+      width: 1110px;
       .name {
         font-size: 0.7rem;
         color: @third-text-color;
@@ -328,6 +329,10 @@ img.el-upload-list__item-thumbnail {
       .el-button {
         color: @main-color;
         border-color: @main-color;
+      }
+      td {
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
     .property-list {

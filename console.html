@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Create your Realtor Webpage in Chinese - Realtoraccess</title>
   <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
-  <!-- <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
-  <link rel="stylesheet" href="{% static 'web/css/console.css' %}"> -->
-  <link rel="stylesheet" href="css/element.css">
-  <link rel="stylesheet" href="css/console.css">
+  <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
+  <link rel="stylesheet" href="{% static 'web/css/console.css' %}">
+  <!-- <link rel="stylesheet" href="css/element.css">
+  <link rel="stylesheet" href="css/console.css"> -->
 </head>
 
 <body>
@@ -162,6 +162,7 @@
             </el-tabs>
           </el-form>
         </div>
+
         <el-button class="btn-primary" @click="submitAgentForm" :loading="isUpdating">Save</el-button>
         <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
 
@@ -176,10 +177,10 @@
             <div class="item" v-for="property in propertyList" v-bind:key="property.mls">
               <table>
                 <tr>
-                  <td width="100" class="name">Property ID</td>
-                  <td width="154" class="content">[[property.mls]]</td>
-                  <td width="111" class="name">Listing URL</td>
-                  <td width="555" class="content"><a target="_blank" :href="property.url">[[property.url]]</a></td>
+                  <td width="100px" class="name">Property ID</td>
+                  <td width="120px" class="content">[[property.mls]]</td>
+                  <td width="111px" class="name">Listing URL</td>
+                  <td class="content"><a target="_blank" :href="property.url">[[property.url]]</a></td>
                 </tr>
                 <tr>
                   <td class="name">Listing views</td>
@@ -192,7 +193,7 @@
                   <td class="content">[[property.date]]</td>
                   <td class="name">Open house</td>
                   <td class="content">[[formatOpenDate(property.opendate1)]]
-                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 2em;">update</el-button>
+                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 1em;">update</el-button>
                     [[formatOpenDate(property.opendate2)]]
                     <el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button>
                   </td>
@@ -307,18 +308,18 @@
     </div>
   </div>
 </body>
-<script src="js/jquery.min.js"></script>
+<!-- <script src="js/jquery.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/axios.min.js"></script>
 <script src="js/element.js"></script>
-<script src="js/en.js"></script>
-<!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
+<script src="js/en.js"></script> -->
+<script src="{% static 'web/js/jquery.min.js' %}"></script>
 <script src="{% static 'web/js/moment.min.js' %}"></script>
 <script src="{% static 'web/js/vue.min.js' %}"></script>
 <script src="{% static 'web/js/axios.min.js' %}"></script>
 <script src="{% static 'web/js/element.js' %}"></script>
-<script src="{% static 'web/js/en.js' %}"></script> -->
+<script src="{% static 'web/js/en.js' %}"></script>
 
 <script>
   ELEMENT.locale(ELEMENT.lang.en)
@@ -394,13 +395,13 @@
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      // this.user = {{ user | safe}}
-      // let imgs = {{ imgs | safe}}
-      // this.creditCard = {{ card | safe}}
-      // this.orderList = {{ orders | safe}}
-      // this.user.photoImages = imgs.map(function (imageItem) {
-      //   return {url: imageItem.img, imgid: imageItem.imgid}
-      // })
+      this.user = {{ user | safe}}
+      let imgs = {{ imgs | safe}}
+      this.creditCard = {{ card | safe}}
+      this.orderList = {{ orders | safe}}
+      this.user.photoImages = imgs.map(function (imageItem) {
+        return {url: imageItem.img, imgid: imageItem.imgid}
+      })
       // this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
       this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
