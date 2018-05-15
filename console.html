@@ -622,16 +622,16 @@
             let dateString = moment(originDateString).format('YYYY-MM-DD')
             let originTime2String = origin.substring(9, 15)
             let time2 = moment(originTime2String, 'HHmmss').format('HH:mm')
-            return dateString + ' '  + ' ~ ' + time2
+            return dateString + ' '  + time2
           } else {
             let originDateString = origin.substring(0, 8)
             let dateString = moment(originDateString).format('YYYY-MM-DD')
             let originTime1String = origin.substring(8, 14)
             let time1 = moment(originTime1String, 'HHmmss').format('HH:mm')
-            return dateString + ' ' + time1 + ' ~ '
+            return dateString + ' ' + time1
           }
         } else {
-          return ' ~ ' 
+          return '1970-01-01 00:00 ~ 2199-12-31 00:00' 
         }
       },
       showOpenHouseDateDialog: function (index, id, origin) {
