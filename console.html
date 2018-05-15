@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Create your Realtor Webpage in Chinese - Realtoraccess</title>
   <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
-  <link rel="stylesheet" href="{% static 'web/css/console.css' %}">
-  <!-- <link rel="stylesheet" href="css/element.css">
-  <link rel="stylesheet" href="css/console.css"> -->
+  <!-- <link rel="stylesheet" href="{% static 'web/css/element.css' %}">
+  <link rel="stylesheet" href="{% static 'web/css/console.css' %}"> -->
+  <link rel="stylesheet" href="css/element.css">
+  <link rel="stylesheet" href="css/console.css">
 </head>
 
 <body>
@@ -307,18 +307,18 @@
     </div>
   </div>
 </body>
-<!-- <script src="js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/axios.min.js"></script>
 <script src="js/element.js"></script>
-<script src="js/en.js"></script> -->
-<script src="{% static 'web/js/jquery.min.js' %}"></script>
+<script src="js/en.js"></script>
+<!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
 <script src="{% static 'web/js/moment.min.js' %}"></script>
 <script src="{% static 'web/js/vue.min.js' %}"></script>
 <script src="{% static 'web/js/axios.min.js' %}"></script>
 <script src="{% static 'web/js/element.js' %}"></script>
-<script src="{% static 'web/js/en.js' %}"></script>
+<script src="{% static 'web/js/en.js' %}"></script> -->
 
 <script>
   ELEMENT.locale(ELEMENT.lang.en)
@@ -394,15 +394,15 @@
     beforeMount: function () {
       this.polyfill()
       //初始化user对象
-      this.user = {{ user | safe}}
-      let imgs = {{ imgs | safe}}
-      this.creditCard = {{ card | safe}}
-      this.orderList = {{ orders | safe}}
-      this.user.photoImages = imgs.map(function (imageItem) {
-        return {url: imageItem.img, imgid: imageItem.imgid}
-      })
+      // this.user = {{ user | safe}}
+      // let imgs = {{ imgs | safe}}
+      // this.creditCard = {{ card | safe}}
+      // this.orderList = {{ orders | safe}}
+      // this.user.photoImages = imgs.map(function (imageItem) {
+      //   return {url: imageItem.img, imgid: imageItem.imgid}
+      // })
       // this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
-      //this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
+      this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
       this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []
@@ -551,19 +551,19 @@
         }
       },
       countryChange: function () {
-        this.user.prov = ''
+        this.agent.prov = ''
         this.fetchProvList()
       },
       provChange: function () {
-        this.user.group = ''
+        this.agent.group = ''
         this.fetchGroupList()
       },
       groupChange: function () {
-        this.user.city = ''
+        this.agent.city = ''
         this.fetchCityList()
       },
       cityChange: function () {
-        this.user.county = ''
+        this.agent.county = ''
       },
       fetchCountryList: function () {
         let self = this

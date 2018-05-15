@@ -138,9 +138,22 @@ footer {
   }
   #error-info {
     position: absolute;
-    bottom: 170px;
+    bottom: 120px;
     left: 49px;
   }
+  input[type='checkbox'] {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin:0;
+  }
+  input[type='checkbox'] + label {
+    display: block;
+    color: @text-third-color;
+    font-size: 0.6rem;
+    font-weight: 400;
+  }
+
 }
 .feature {
   background: white;
@@ -209,6 +222,7 @@ footer {
 @media screen and (max-width: 768px) {
   .top {
     padding: 20px 0;
+    background-position: right;
   }
   .btn-contact {
     margin-top: 20px;
@@ -223,5 +237,10 @@ footer {
   }
   h2.left-title {
     font-size: 24px;
+  }
+  .feature {
+    .feature-item {
+      margin-top: 4em;
+    }
   }
 }

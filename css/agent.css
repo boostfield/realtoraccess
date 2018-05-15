@@ -558,6 +558,7 @@ h4 .read-more {
   }
   .navbar .navbar-text.location {
     line-height: 60px;
+    margin: 0;
   }
   .navbar .navbar-brand img {
     width: 94px;
@@ -572,6 +573,9 @@ h4 .read-more {
   }
   .top {
     min-height: 42.45973646vw;
+  }
+  .top .title-info {
+    text-align: center !important;
   }
   .top .title-info .logo h2 {
     font-size: 1.5rem;
@@ -669,7 +673,9 @@ h4 .read-more {
     margin: 1em auto;
   }
   .footer-top .logo h2 {
-    display: inline-block;
+    display: block;
+    text-align: center;
+    margin-left: 0;
   }
   .footer-top .contact {
     padding-left: 15px;
