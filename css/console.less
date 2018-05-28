@@ -260,6 +260,7 @@ img.el-upload-list__item-thumbnail {
     border: 1px solid @border-color;
     border-radius: 4px;
     box-shadow:1px 0px 6px rgba(0,0,0,0.03);
+    float: left;
     .el-select>.el-input {
       width: 112px;
       margin-right: 10px;
@@ -326,6 +327,14 @@ img.el-upload-list__item-thumbnail {
           text-decoration: none;
         }
       }
+      .date {
+        width: 288px;
+        display: inline-block;
+      }
+      .button {
+        width: 84px;
+        display: inline-block;
+      }
       .el-button {
         color: @main-color;
         border-color: @main-color;
@@ -378,6 +387,10 @@ img.el-upload-list__item-thumbnail {
     .invoice-list {
       .item {
         margin-top: 20px;
+        .invoice-action {
+          text-decoration: none;
+          color: @main-color;
+        }
       }
     }
   }
@@ -392,4 +405,49 @@ img.el-upload-list__item-thumbnail {
       font-weight: bold;
     }
   } 
+}
+.banner-container {
+  float: left;
+  background: white;
+  border-radius: 4px;
+  box-shadow:1px 0px 6px rgba(0,0,0,0.03);
+  border: 1px solid @border-color;
+  padding: 30px 20px;
+  margin-top: 30px;
+  margin-left: 20px;
+  max-width: 470px;
+  img {
+    margin: 0 auto;
+    display: block;
+  }
+  h2 {
+    font-size: 1rem;
+    color: @text-color;
+  }
+  h3 {
+    font-size: 0.7rem;
+    color: @second-text-color;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+  .demo {
+    float: left;
+    color: @main-color;
+    font-size: 0.8rem;
+    margin-top: 40px;
+  }
+  button.charge {
+    border: none;
+    background: @main-color;
+    color: white;
+    font-size: 1rem;
+    float: right;
+    margin-top: 25px;
+    width: 130px;
+    height: 50px;
+    cursor: pointer;
+    span {
+      font-size: 0.7rem;
+    }
+  }
 }

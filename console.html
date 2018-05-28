@@ -162,9 +162,27 @@
             </el-tabs>
           </el-form>
         </div>
-
-        <el-button class="btn-primary" @click="submitAgentForm" :loading="isUpdating">Save</el-button>
-        <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
+        <div v-show="agentTabActiveIndex != 'agent2'" class="banner-container">
+          <img src="{% static 'web/img/img_01@2x.png' %}" width="465"/>
+          <h2>Responsive-designed webpage</h2>
+          <h3>Wechat QR code + Property Hosting + SEO Enhancement</h3>
+          <a href="#"><div class="demo">Live Demos</div></a>
+          <button class="charge">$288 / Year<br></button>          
+        </div>
+        <div v-show="agentTabActiveIndex == 'agent2'" class="banner-container">
+            <img src="{% static 'web/img/img_02@2x.png' %}" width="465"/>
+            <h2>Translation and Realtor Certification Badge</h2>
+            <h3>Our designated professional translators, we’ll help you translate everything 
+                you want to say on your website. And we also developed our own realtor 
+                certification badge, which helps to build viewers’ trust.</h3>
+                <a href="#"><div class="demo">Live Demos</div></a>
+                 <button class="charge">$79<br><span>One time fee</span></button>
+          </div>
+        <div style="clear: both;">
+            <el-button class="btn-primary" @click="submitAgentForm" :loading="isUpdating">Save</el-button>
+            <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
+        </div>
+        
 
       </div>
       <!--房源信息-->
@@ -192,11 +210,12 @@
                   <td class="name">Date</td>
                   <td class="content">[[property.date]]</td>
                   <td class="name">Open house</td>
-                  <td class="content">[[formatOpenDate(property.opendate1)]]
-                    <el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 1em;">update</el-button>
-                    [[formatOpenDate(property.opendate2)]]
-                    <el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button>
-                  </td>
+                  <td class="content">
+                    <div class="date">[[formatOpenDate(property.opendate1)]]</div>
+                    <div class="button"><el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 1em;">update</el-button></div>
+                    <div class="date">[[formatOpenDate(property.opendate2)]]</div>
+                    <div class="button"><el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button></div>
+                    </td>
                 </tr>
               </table>
             </div>
@@ -266,7 +285,7 @@
                     <el-table-column
                       label="Actions">
                       <template slot-scope="scope">
-                        <a :href="scope.row.invoice">[[scope.row.invoice]]</a>
+                        <a class="invoice-action" :href="scope.row.invoice" target="_blank">[[scope.row.invoice]]</a>
                       </template>
                     </el-table-column>
                   </el-table>
