@@ -6,12 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Realtoraccess</title>
+    <title>【{{user.username}}房产经纪人_{{user.username}}_{{user.corp}}】-海外瑞安居</title>
+    <meta name="keywords" content="{{user.username}},房产经纪人{{user.username}},{{user.corp}}{{user.username}}" />
+    <meta name="Description" content="{{user.username}}是{{user.corp}}的房产经纪人，{{user.username}}是经过瑞安居认证的可信赖的房产经纪人，更多{{user.username}}的信誉信息和正在经纪的海外房产信息就来海外瑞安居。" />
     <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/agent.css" rel="stylesheet"> -->
+
+    <script>
+        window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "",
+                "bdMini": "2",
+                "bdMiniList": false,
+                "bdPic": "",
+                "bdStyle": "2",
+                "bdSize": "16"
+            },
+            "share": {}
+        };
+        with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
+
+    
 
 </head>
 
@@ -64,10 +85,11 @@
     </nav>
     <div class="top">
         <div class="container">
-            <div class="share-options">
-                <button class="btn-share facebook"></button>
-                <button class="btn-share weibo"></button>
-                <button class="btn-share wechat"></button>
+            <div class="share-options bdsharebuttonbox">
+                
+                <button onclick="window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(document.location.href)+'&amp;t='+encodeURIComponent(document.title),'_blank','toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=600, height=450,top=100,left=350');void(0)" class="btn-share facebook"></button>
+                <a class="btn-share weibo" data-cmd="tsina" role="button"></a>
+                <a class="btn-share wechat" data-cmd="weixin" role="button"></a>
             </div>
         </div>
         <div class="container title-info">
@@ -133,7 +155,7 @@
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_website@2x.png'%}" alt="网址" />
                 <h3>网址</h3>
-                <h4><a href="{{user.website}}" rel="nofollow">{{user.website}}</a></h4>
+                <h4><a href="http://{{user.website}}" rel="nofollow">{{user.website}}</a></h4>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-6 item">
                 <img src="{% static 'web/img/img_account_email@2x.png'%}" alt="邮箱" />
@@ -156,6 +178,16 @@
         <div class="container">
             <div class="row vertical-align">
                 <div class="col-lg-6 col-md-12 ">
+                    {% if auth == 1 and user.selfintro_cn != '' %}
+                    <div class="text-part">
+                        <h2>个人介绍</h2>
+                        <h4 id="selfIntro">{{user.selfintro_cn}}
+                            <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                title="" data-content="<div>{{user.selfintro_cn}}
+                                </div>">[查看更多]</div>
+                        </h4>
+                    </div>
+                    {% else %}
                     <div class="text-part">
                         <h2>个人介绍</h2>
                         <h4 id="selfIntro">{{user.selfintro}}
@@ -164,6 +196,7 @@
                                 </div>">[查看更多]</div>
                         </h4>
                     </div>
+                    {% endif %}
 
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -209,7 +242,16 @@
                     <img width="420" height="420" src="{% static 'web/img/img_team@2x.png'%}"/>
                 </div>
                 <div class="col-lg-6 col-md-12 ">
-
+                    {% if auth == 1 and user.teamintro_cn != '' %}
+                    <div class="text-part">
+                        <h2>团队介绍</h2>
+                        <h4 id="teamIntro">{{user.teamintro_cn}}
+                                <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                    title="" data-content="<div>{{user.teamintro_cn}}
+                                    </div>">[查看更多]</div>
+                            </h4>
+                    </div>
+                    {% else %}
                     <div class="text-part">
                         <h2>团队介绍</h2>
                         <h4 id="teamIntro">{{user.teamintro}}
@@ -218,6 +260,7 @@
                                     </div>">[查看更多]</div>
                             </h4>
                     </div>
+                    {% endif %}
 
                 </div>
                 <div class="col-lg-6 col-md-12 visible-xs">
@@ -234,7 +277,16 @@
             <div class="row vertical-align">
 
                 <div class="col-lg-6 col-md-12 ">
-
+                    {% if auth == 1 and user.corpintro_cn != '' %}
+                    <div class="text-part">
+                        <h2>公司介绍</h2>
+                        <h4 id="corpIntro">{{user.corpintro_cn}}
+                                <div class="read-more hidden-xs" tabindex="0" role="button" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom"
+                                    title="" data-content="<div>{{user.corpintro_cn}}
+                                    </div>">[查看更多]</div>
+                            </h4>
+                    </div>
+                    {% else %}
                     <div class="text-part">
                         <h2>公司介绍</h2>
                         <h4 id="corpIntro">{{user.corpintro}}
@@ -243,6 +295,7 @@
                                     </div>">[查看更多]</div>
                             </h4>
                     </div>
+                    {% endif %}
 
                 </div>
                 <div class="col-lg-6 col-md-12 text-right">
@@ -306,10 +359,10 @@
     <hr />
 
     <div class="fixed-options">
-        <div class="btn-option"><a href="https://www.fangdaijisuanqi.com/" target="_blank"><img src="{% static 'web/img/img_right_01@2x.png' %}" /></a></div>
+        <div class="btn-option"><a href="https://www.fangdaijisuanqi.com/" target="_blank" rel="nofollow"><img src="{% static 'web/img/img_right_01@2x.png' %}" /></a></div>
         <div class="btn-option wechat"><img src="{% static 'web/img/img_right_02@2x.png' %}"/></div>
-        <div class="btn-option"><a href="http://ruianju.kuaizhan.com/clubv2/forums/WNPMtTEF8TSeToY_" target="_blank"><img src="{% static 'web/img/img_right_03@2x.png' %}" /></a></div>
-        <div class="btn-option"><a href="http://www.huilvwang.com/" target="_blank"><img src="{% static 'web/img/img_right_04@2x.png' %}" /></a></div>
+        <div class="btn-option"><a href="http://ruianju.kuaizhan.com/clubv2/forums/WNPMtTEF8TSeToY_" target="_blank" rel="nofollow"><img src="{% static 'web/img/img_right_03@2x.png' %}" /></a></div>
+        <div class="btn-option"><a href="http://www.huilvwang.com/" target="_blank" rel="nofollow"><img src="{% static 'web/img/img_right_04@2x.png' %}" /></a></div>
         <div class="btn-option backTop"><img src="{% static 'web/img/img_right_top@2x.png' %}" /></div>
         
     </div>
@@ -373,6 +426,57 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-116462236-1');
+    </script>
+
+    <script type="text/javascript">
+    var timestamp = new Date().getTime();
+    timestamp = timestamp.toString().substring(0, 10);
+    var url = window.location.href;
+    url = encodeURIComponent(url.split('#')[0]);
+
+    var signature;
+    var imgurl = '{{ user.head.url }}'
+
+
+    $.get('http://www.realtoraccess.com/weixin/jsapi/?timestamp=' + timestamp + '&url=' + url, function(data) {
+        signature = data;
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wxcd1c7e6e724cc101', // 必填，公众号的唯一标识
+            timestamp: timestamp, // 必填，生成签名的时间戳
+            nonceStr: 'realter', // 必填，生成签名的随机串
+            signature: signature, // 必填，签名，见附录1
+            jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        wx.ready(function() {
+            wx.onMenuShareAppMessage({
+                title: '房产经纪人-{{ user.username }}-{{ user.city }}', // 分享标题
+                desc: '{{ user.note }} -> {{user.tel}} , 点击了解 -> 经纪人及特色房源', // 分享描述
+                link: '', // 分享链接
+                imgUrl: imgurl, // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: '房产经纪人-{{ user.username }}-{{ user.city }}', // 分享标题
+                link: '', // 分享链接
+                imgUrl: imgurl, // 分享图标
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+    })
     </script>
 </body>
 

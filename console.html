@@ -166,7 +166,7 @@
           <img src="{% static 'web/img/img_01@2x.png' %}" width="465"/>
           <h2>Responsive-designed webpage</h2>
           <h3>Wechat QR code + Property Hosting + SEO Enhancement</h3>
-          <a href="#"><div class="demo">Live Demos</div></a>
+          <a href="http://www.realtoraccess.com/web/agent2/174/" target="_blank"><div class="demo">Live Demos</div></a>
           <button class="charge">$288 / Year<br></button>          
         </div>
         <div v-show="agentTabActiveIndex == 'agent2'" class="banner-container">
@@ -175,7 +175,7 @@
             <h3>Our designated professional translators, we’ll help you translate everything 
                 you want to say on your website. And we also developed our own realtor 
                 certification badge, which helps to build viewers’ trust.</h3>
-                <a href="#"><div class="demo">Live Demos</div></a>
+                <a href="http://www.realtoraccess.com/web/agent2/174/" target="_blank"><div class="demo">Live Demos</div></a>
                  <button class="charge">$79<br><span>One time fee</span></button>
           </div>
         <div style="clear: both;">
@@ -189,7 +189,7 @@
       <div id="page-properties" v-show="activeIndex == 3">
         <div class="container">
           <h2>Manage Properties</h2>
-          <el-button class="btn-primary" size="medium">Live Demos</el-button>
+          <el-button class="btn-primary" size="medium" @click="smartFlyerDemo">Live Demos</el-button>
           <hr />
           <div class="property-list">
             <div class="item" v-for="property in propertyList" v-bind:key="property.mls">
@@ -285,7 +285,7 @@
                     <el-table-column
                       label="Actions">
                       <template slot-scope="scope">
-                        <a class="invoice-action" :href="scope.row.invoice" target="_blank">[[scope.row.invoice]]</a>
+                        <a class="invoice-action" @click="askForInvoice" target="_blank" style="cursor: pointer;">Invoice</a>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -339,6 +339,7 @@
 <script src="{% static 'web/js/axios.min.js' %}"></script>
 <script src="{% static 'web/js/element.js' %}"></script>
 <script src="{% static 'web/js/en.js' %}"></script>
+<script src="https://qiyukf.com/script/8f268b771e08cca286c1c202bb681317.js"></script>
 
 <script>
   ELEMENT.locale(ELEMENT.lang.en)
@@ -811,8 +812,25 @@
         }
         return ''
       },
+      askForInvoice: function (cardno) {
+        $.ajax({
+          type: 'GET',
+          url: 'http://www.realtoraccess.com/web/get-invoice/',
+          data: { userid: this.user.userid },
+          success: function (resp) {
+            alert('Your invoice will be sent to you soon!')
+            return false
+          }
+        })
+      },
       enterHome: function () {
         window.location.href = '/'
+      },
+      smartFlyerDemo: function(){
+        window.open("http://www.webmainland.com/sp/listing/r2122650/?token=201805370935034")
+      },
+      agentPageDemo: function(){
+        window.open("http://www.realtoraccess.com/web/agent2/174")
       }
     }
   })
