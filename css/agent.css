@@ -10,6 +10,9 @@ body {
 img {
   object-fit: cover;
 }
+.clear-fix {
+  clear: both;
+}
 .navbar {
   height: 90px;
   background-color: white;
@@ -213,6 +216,8 @@ img {
 .basic-info .item h4 {
   font-size: 0.8rem;
   font-weight: 400;
+  overflow: initial;
+  word-break: break-all;
 }
 .basic-info .item h4 a {
   color: #333;
@@ -252,6 +257,7 @@ h4 .read-more {
   position: relative;
   line-height: 2.5;
   margin-bottom: 30px;
+  margin-top: 0;
 }
 .personal-info h2:after {
   width: 60px;
@@ -307,6 +313,7 @@ h4 .read-more {
   line-height: 2.5;
   margin-bottom: 30px;
   text-align: right;
+  margin-top: 0;
 }
 .team-info h2:after {
   width: 60px;
@@ -346,6 +353,7 @@ h4 .read-more {
   line-height: 2.5;
   margin-bottom: 30px;
   text-align: left;
+  margin-top: 0;
 }
 .company-info h2:after {
   width: 60px;
@@ -537,6 +545,21 @@ h4 .read-more {
   right: 73px;
   z-index: 999;
   display: none;
+}
+@media (min-width: 768px) and (max-width: 1000px) {
+  .navbar .container {
+    width: 100%;
+  }
+  .navbar .navbar-text.location {
+    margin: 0;
+  }
+  .navbar .navbar-nav > li {
+    margin-right: 4px;
+  }
+  .navbar .navbar-nav > li a {
+    margin: 0;
+    padding: 0 4px;
+  }
 }
 @media screen and (min-width: 1200px) {
   .container {
