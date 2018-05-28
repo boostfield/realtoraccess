@@ -73,7 +73,7 @@
             </el-form-item>
           </el-form>
         </div>
-        <el-button type="primary" class="btn-primary" @click="submitProfileForm" :loading="isUpdating">Save</el-button>
+        <el-button type="primary" class="btn-primary" @click="submitProfileForm">Save</el-button>
       </div>
       <!--经纪人信息-->
       <div id="page-agent" v-show="activeIndex == 2">
@@ -179,7 +179,7 @@
                  <button class="charge">$79<br><span>One time fee</span></button>
           </div>
         <div style="clear: both;">
-            <el-button class="btn-primary" @click="submitAgentForm" :loading="isUpdating">Save</el-button>
+            <el-button class="btn-primary" @click="submitAgentForm">Save</el-button>
             <el-button class="btn-preview" @click="preViewMypage">Preview</el-button>
         </div>
         
@@ -234,7 +234,7 @@
           </el-form>
             <span slot="footer" class="dialog-footer">
               <el-button @click="openHouseDateDialogVisible = false" type="text" size="small">Cancel</el-button>
-              <el-button type="primary" @click="confirmOpenHouseDate" size="small" :loading="isUpdating">Done</el-button>
+              <el-button type="primary" @click="confirmOpenHouseDate" size="small">Done</el-button>
             </span>
           </el-dialog>
         </div>
@@ -320,7 +320,7 @@
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="paymentMethodDialogVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="confirmPaymentMethodDialog" :loading="isUpdating">Update</el-button>
+            <el-button type="primary" @click="confirmPaymentMethodDialog">Update</el-button>
           </span>
         </el-dialog>
       </div>
@@ -408,8 +408,7 @@
           { min: 3, max: 3, message: 'Please enter correct security code', trigger: 'blur' }],
           postid: [{ required: true, message: 'Please enter Zip Code', trigger: 'blur' }],
         },
-        orderList: [],
-        isUpdating: false
+        orderList: []
       }
     },
     beforeMount: function () {
@@ -422,7 +421,7 @@
       this.user.photoImages = imgs.map(function (imageItem) {
         return {url: imageItem.img, imgid: imageItem.imgid}
       })
-      // this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
+      //this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
       this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
@@ -737,7 +736,9 @@
       },
       updateInfo: function (data) {
         let self = this
-        self.isUpdating = true
+        const loading = this.$loading({
+          lock: true
+        })
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postinfo/',
@@ -745,7 +746,7 @@
           success: function (resp) {
             let respData = JSON.parse(resp)
             let code = respData.rescode
-            self.isUpdating = false
+            loading.close()
             if (code !== "0") {
               self.$message({
                 type: 'error',
@@ -762,13 +763,11 @@
       },
       addCard: function (data) {
         let self = this
-        self.isUpdating = true
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/addcard/',
           data: Object.assign({ userid: this.user.userid }, data),
           success: function (resp) {
-            self.isUpdating = false
             self.paymentMethodDialogVisible = false
             self.creditCard = Object.assign(self.paymentForm)
             self.paymentForm = {}
@@ -781,13 +780,11 @@
       },
       updateOpenDate: function (data) {
         let self = this
-        self.isUpdating = true
         $.ajax({
           type: 'POST',
           url: 'http://www.realtoraccess.com/web/postopendate/',
           data: Object.assign({ userid: this.user.userid }, data),
           success: function (resp) {
-            self.isUpdating = false
             let respData = JSON.parse(resp)
             let code = respData.rescode
             if (code !== "0") {
