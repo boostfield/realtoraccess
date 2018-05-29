@@ -421,12 +421,12 @@
       this.user.photoImages = imgs.map(function (imageItem) {
         return {url: imageItem.img, imgid: imageItem.imgid}
       })
-      //this.user.headImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
+      //this.user.qrcodeImage = [{imgid: 'head', url: 'https://www.boostfield.com/wp-content/uploads/2018/04/img_service_03@2x.png'}]
       this.user.headImage = this.user.head ? [{ url: this.user.head, imgid: 'head' }] : []
       this.user.qrcodeImage = this.user.qrcode ? [{ url: this.user.qrcode, imgid: 'qrcode' }] : []
       
       this.user.head2Image = this.user.head2 ? [{ url: this.user.head2, imgid: 'head2' }] : []
-      this.user.qrcode2Image = this.user.qrcode2 ? [{ url: this.user.qrcode2, imgid: 'head2' }] : []
+      this.user.qrcode2Image = this.user.qrcode2 ? [{ url: this.user.qrcode2, imgid: 'qrcode2' }] : []
 
       //将user中的数据存入profile
       this.profile.email = this.user.email || ''
@@ -504,6 +504,12 @@
         this.activeIndex = index
       },
       handleAvatarSuccess: function (res, file, fileList) {
+        if (this.user.headImage.length > 0) {
+          this.user.headImage[0].url = URL.createObjectURL(file.raw)
+        } else {
+          this.user.headImage = [{url: URL.createObjectURL(file.raw), imgid: 'head'}]
+        }
+        
         file.imgid = 'head'
         this.$refs.uploadAvatar.fileList = [file]
         this.$message({
@@ -515,6 +521,11 @@
         //this.$refs.uploadAvatar.clearFiles()
       },
       handleAvatar2Success: function (res, file, fileList) {
+        if (this.user.head2Image.length > 0) {
+          this.user.head2Image[0].url = URL.createObjectURL(file.raw)
+        } else {
+          this.user.head2Image = [{url: URL.createObjectURL(file.raw), imgid: 'head2'}]
+        }
         file.imgid = 'head2'
         this.$refs.uploadAvatar2.fileList = [file]
         this.$message({
@@ -523,6 +534,11 @@
         })
       },
       handleQRCodeSuccess: function (res, file, fileList) {
+        if (this.user.qrcodeImage.length > 0) {
+          this.user.qrcodeImage[0].url = URL.createObjectURL(file.raw)
+        } else {
+          this.user.qrcodeImage = [{url: URL.createObjectURL(file.raw), imgid: 'qrcode'}]
+        }
         file.imgid = 'qrcode'
         this.$refs.uploadQRCode.fileList = [file]
         this.$message({
@@ -531,6 +547,11 @@
         })
       },
       handleQRCode2Success: function (res, file, fileList) {
+        if (this.user.qrcode2Image.length > 0) {
+          this.user.qrcode2Image[0].url = URL.createObjectURL(file.raw)
+        } else {
+          this.user.qrcode2Image = [{url: URL.createObjectURL(file.raw), imgid: 'qrcode2'}]
+        }
         file.imgid = 'qrcode2'
         this.$refs.uploadQRCode2.fileList = [file]
         this.$message({
@@ -540,6 +561,7 @@
       },
       handlePhotoSuccess: function (res, file, fileList) {
         file.imgid = res
+        this.user.photoImages.push({url: URL.createObjectURL(file.raw), imgid: res})
         this.$message({
           message: 'upload photo success',
           type: 'success'
@@ -565,6 +587,21 @@
                   type: 'success',
                   message: 'Delete Success'
                 })
+                // here we should use the imgid to correctly change origin img data 
+                const imgid = file.imgid
+                if (imgid == 'head') {
+                  self.user.headImage = []
+                } else if (imgid == 'head2') {
+                  self.user.head2Image = []
+                } else if (imgid == 'qrcode') {
+                  self.user.qrcodeImage = []
+                } else if (imgid == 'qrcode2') {
+                  self.user.qrcode2Image = []
+                } else {
+                  self.user.photoImages = self.user.photoImages.filter(function (item) {
+                    return item.imgid != imgid
+                  })
+                }
               }
             }
           })
