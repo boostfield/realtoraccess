@@ -10,11 +10,11 @@
     <meta name="keywords" content="{{user.username}},房产经纪人{{user.username}},{{user.corp}}{{user.username}}" />
     <meta name="Description" content="{{user.username}}是{{user.corp}}的房产经纪人，{{user.username}}是经过瑞安居认证的可信赖的房产经纪人，更多{{user.username}}的信誉信息和正在经纪的海外房产信息就来海外瑞安居。" />
     <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/agent.css' %}"> -->
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/agent.css" rel="stylesheet"> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agent.css" rel="stylesheet">
 
     <script>
         window._bd_share_config = {
@@ -74,9 +74,11 @@
                     <li>
                         <a href="http://www.realtoraccess.com/news/list/">全球资讯</a>
                     </li>
-                    <a class="not-login" href="/web/page/signin/" rel="nofollow">Agent? Log in</a>
-                    <a class="not-login"> | </a>
-                    <a class="not-login" href="/web/page/signup/" rel="nofollow">Sign up</a>
+                    <div class="login-panel">
+                        <a class="not-login" href="/web/page/signin/" rel="nofollow">Agent? Log in</a>
+                        <a class="not-login"> | </a>
+                        <a class="not-login" href="/web/page/signup/" rel="nofollow">Sign up</a>
+                    </div>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -413,14 +415,14 @@
     </footer>
 
 
-    <!-- <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="js/main.js"></script> -->
-    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'web/js/jquery.validate.min.js' %}"></script>
-    <script src="{% static 'web/js/main.js' %}"></script>
+    <script src="{% static 'web/js/main.js' %}"></script> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116462236-1"></script>
     <script>

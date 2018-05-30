@@ -59,11 +59,14 @@ img {
   border: none;
   margin-top: 14px;
 }
+.navbar .login-panel {
+  float: left;
+  padding-right: 15px;
+}
 .navbar .not-login {
   line-height: 90px;
   color: #00C700;
   margin-right: 4px;
-  float: left;
 }
 .top {
   height: 580px;
