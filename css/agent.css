@@ -63,6 +63,7 @@ img {
   line-height: 90px;
   color: #00C700;
   margin-right: 4px;
+  float: left;
 }
 .top {
   height: 580px;
@@ -603,6 +604,9 @@ h4 .read-more {
   .top .title-info .logo h2 {
     font-size: 1.5rem;
     text-align: center;
+  }
+  .top .title-info .name > h4 {
+    color: #333;
   }
   .basic-info {
     padding-top: 20px;
