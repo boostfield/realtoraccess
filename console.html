@@ -198,24 +198,26 @@
                   <td width="100px" class="name">Property ID</td>
                   <td width="120px" class="content">[[property.mls]]</td>
                   <td width="111px" class="name">Listing URL</td>
-                  <td class="content"><a target="_blank" :href="property.url">[[property.url]]</a></td>
+                  <td class="content" colspan="2"><a target="_blank" :href="property.url">[[property.url]]</a></td>
                 </tr>
                 <tr>
                   <td class="name">Listing views</td>
                   <td class="content">[[property.visit]]</td>
                   <td class="name">Viewer Report</td>
-                  <td class="content"><a target="_blank" :href="property.consoleurl">[[property.consoleurl]]</a></td>
+                  <td class="content" colspan="2"><a target="_blank" :href="property.consoleurl">[[property.consoleurl]]</a></td>
                 </tr>
-                <tr>
+                <tr style="vertical-align:top">
                   <td class="name">Date</td>
                   <td class="content">[[property.date]]</td>
                   <td class="name">Open house</td>
-                  <td class="content">
+                  <td class="content" >
                     <div class="date">[[formatOpenDate(property.opendate1)]]</div>
-                    <div class="button"><el-button size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)" style="margin-right: 1em;">update</el-button></div>
+                    <el-button style="display: block; margin-top: 1em;" size="mini" @click="showOpenHouseDateDialog(1, property.mls, property.opendate1)">update</el-button>
+                  </td>
+                  <td class="content" >
                     <div class="date">[[formatOpenDate(property.opendate2)]]</div>
-                    <div class="button"><el-button size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button></div>
-                    </td>
+                    <el-button style="display: block; margin-top: 1em;" size="mini" @click="showOpenHouseDateDialog(2, property.mls, property.opendate2)">update</el-button>
+                  </td>
                 </tr>
               </table>
             </div>
@@ -350,7 +352,7 @@
       return {
         activeIndex: '1',
         user: {
-          userid: 'qky12345@qq.com',
+          userid: 'mcjohn@gmail.com',
           country: '',
           prov: '',
           group: '',

@@ -13,6 +13,11 @@ img {
 .clear-fix {
   clear: both;
 }
+.equal-height {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
 .navbar {
   height: 90px;
   background-color: white;
@@ -140,10 +145,12 @@ img {
   font-weight: 200;
 }
 .top .title-info .logo {
-  vertical-align: middle;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 .top .title-info .logo h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 20px;
 }
 .top .title-info .logo span.service {
@@ -564,15 +571,26 @@ h4 .read-more {
     margin: 0;
     padding: 0 4px;
   }
+  .top .title-info .logo {
+    position: static;
+  }
 }
 @media screen and (min-width: 1200px) {
   .container {
     width: 1060px;
   }
 }
+@media screen and (max-width: 1200px) {
+  .top .title-info .logo {
+    position: static;
+  }
+}
 @media screen and (max-width: 768px) {
   body {
     padding-top: 60px;
+  }
+  .equal-height {
+    display: initial;
   }
   .navbar {
     height: 60px;
@@ -603,6 +621,9 @@ h4 .read-more {
   }
   .top .title-info {
     text-align: center !important;
+  }
+  .top .title-info .logo {
+    position: static;
   }
   .top .title-info .logo h2 {
     font-size: 1.5rem;

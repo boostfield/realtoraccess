@@ -15,6 +15,11 @@ img {
 .clear-fix {
     clear: both;
 }
+.equal-height {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
 .navbar {
     height: 90px;
     background-color: @nav-color;
@@ -138,9 +143,11 @@ img {
             }
         }
         .logo {
-            vertical-align: middle;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
             h2 {
-                font-size: 2rem;
+                font-size: 1.5rem;
                 margin-top: 20px;
             }
             span.service {
@@ -576,15 +583,27 @@ h4 {
             }
         }
     }
+    .top .title-info .logo {
+        position: static;
+    }
  }
 @media screen and(min-width: 1200px) {
     .container {
         width: 1060px;
     }
+
+}
+@media screen and(max-width: 1200px) {
+    .top .title-info .logo {
+        position: static;
+    }
 }
 @media screen and(max-width: 768px) {
     body {
         padding-top: 60px;
+    }
+    .equal-height {
+        display: initial;
     }
     .navbar {
         height: 60px;
@@ -617,6 +636,7 @@ h4 {
         .title-info {
             text-align: center !important;
             .logo {
+                position: static;
                 h2 {
                     font-size: 1.5rem;
                     text-align: center;
