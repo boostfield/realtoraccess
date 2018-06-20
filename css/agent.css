@@ -46,7 +46,7 @@ img {
   padding-top: 0;
 }
 .navbar .navbar-brand img {
-  width: 148px;
+  width: 89px;
 }
 .navbar .navbar-collapse.collapse.in,
 .navbar .navbar-collapse.collapsing {
@@ -111,9 +111,13 @@ img {
 }
 .top .share-options .btn-share.weibo {
   background-image: url('../img/bt_share_weibo@2x.png');
+  float: right;
+  margin-top: 0px;
 }
 .top .share-options .btn-share.wechat {
   background-image: url('../img/bt_share_wechat@2x.png');
+  float: right;
+  margin-top: 0px;
 }
 .top .title-info {
   position: absolute;
@@ -270,15 +274,6 @@ h4 .read-more {
   margin-bottom: 30px;
   margin-top: 0;
 }
-.personal-info h2:after {
-  width: 60px;
-  height: 5px;
-  content: '';
-  position: absolute;
-  background: #00C700;
-  bottom: 0;
-  left: 0;
-}
 .personal-info h4 {
   text-indent: 2em;
 }
@@ -326,15 +321,6 @@ h4 .read-more {
   text-align: right;
   margin-top: 0;
 }
-.team-info h2:after {
-  width: 60px;
-  height: 5px;
-  content: '';
-  position: absolute;
-  background: #00C700;
-  bottom: 0;
-  right: 0;
-}
 .team-info h4 {
   font-size: 0.7rem;
   line-height: 1.70;
@@ -365,15 +351,6 @@ h4 .read-more {
   margin-bottom: 30px;
   text-align: left;
   margin-top: 0;
-}
-.company-info h2:after {
-  width: 60px;
-  height: 5px;
-  content: '';
-  position: absolute;
-  background: #00C700;
-  bottom: 0;
-  left: 0;
 }
 .company-info h4 {
   font-size: 0.7rem;
@@ -606,7 +583,7 @@ h4 .read-more {
     margin: 0;
   }
   .navbar .navbar-brand img {
-    width: 94px;
+    width: 60px;
   }
   .navbar .not-login {
     line-height: 60px;

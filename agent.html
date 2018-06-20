@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load staticfiles %}
+{% load tinyimg %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>【{{user.username}}房产经纪人_{{user.username}}_{{user.corp}}】-海外瑞安居</title>
-    <meta name="keywords" content="{{user.username}},房产经纪人{{user.username}},{{user.corp}}{{user.username}}" />
-    <meta name="Description" content="{{user.username}}是{{user.corp}}的房产经纪人，{{user.username}}是经过瑞安居认证的可信赖的房产经纪人，更多{{user.username}}的信誉信息和正在经纪的海外房产信息就来海外瑞安居。" />
+    <title>【{{user.username}}房产经纪人_{{user.corp}}_{{user.note}}】-海外瑞安居</title>
+    <meta name="keywords" content="{{user.username}},{{user.username}}房产经纪人,{{user.corp}}{{user.username}},{{user.note}}" />
+    <meta name="Description" content="{{user.username}}是{{user.corp}}的房产经纪人,{{user.note}},{{user.username}}是经过瑞安居认证的可信赖的房产经纪人,更多{{user.username}}的信誉信息和正在经纪的海外房产信息就来海外瑞安居。" />
     <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/agent.css' %}">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/agent.css" rel="stylesheet"> -->
+    <meta property="fb:app_id" content="383582678814907">  
+    <meta property="og:type" content="website">
+    <!-- <meta property="og:url" content=""> -->
+    <meta property="og:description" content="" />
+    <meta property="og:title" content="Realtoraccess-{{ user.username}} {{user.city}}"> 
+    <meta property="og:image" content="{{user.head.url|tiny_agent_img}}">
 
     <script>
         window._bd_share_config = {
@@ -94,9 +101,10 @@
                 <a class="btn-share wechat" data-cmd="weixin" role="button"></a>
             </div>
         </div>
+        
         <div class="container title-info equal-height">
             <div class="col-lg-7 col-xs-12">
-                <img class="avatar" src="{{user.head.url}}" width="122" />
+                <img class="avatar" src="{{user.head.url|tiny_agent_img}}" width="122" />
                 <div class="name">
                     <h1>{{user.username}}
                         {% if auth == 1 %}
@@ -213,11 +221,11 @@
                                 {% for img in imgs %}
                                     {% if forloop.first %}
                                         <div class="item active">
-                                            <img src="{{ img.img }}" alt="" width="420">
+                                            <img src="{{ img.img|tiny_agent_img }}" alt="" width="420">
                                         </div>
                                     {% else %}
                                         <div class="item">
-                                            <img src="{{ img.img }}" alt="" width="420">
+                                            <img src="{{ img.img|tiny_agent_img }}" alt="" width="420">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
